@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Python GUI入门 | Nice To Meet U</title><meta name="description" content="Python GUI入门"><meta name="keywords" content="Python"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Python GUI入门"><meta name="twitter:description" content="Python GUI入门"><meta name="twitter:image" content="https://api.dujin.org/bing/1366.php"><meta property="og:type" content="article"><meta property="og:title" content="Python GUI入门"><meta property="og:url" content="http://yoursite.com/2020/02/10/学习/Python学习/Python GUI入门/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="Python GUI入门"><meta property="og:image" content="https://api.dujin.org/bing/1366.php"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/02/10/学习/Python学习/Python GUI入门/"><link rel="prev" title="Python类和对象" href="http://yoursite.com/2020/02/11/学习/Python学习/Python类和对象/"><link rel="next" title="Python异常处理" href="http://yoursite.com/2020/02/08/学习/Python学习/Python异常处理/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#安装-easygui"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 安装 EasyGui</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#导入-easygui"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text"> 导入 EasyGui</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#各种功能演示"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text"> 各种功能演示</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#使用-easygui"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 使用 EasyGui</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#使用按钮组件"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text"> 使用按钮组件</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#为用户提供一系列的选择"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text"> 为用户提供一系列的选择</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#让用户输入消息"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text"> 让用户输入消息</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#让用户输入密码"><span class="toc_mobile_items-number">2.4.</span> <span class="toc_mobile_items-text"> 让用户输入密码</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#显示文本"><span class="toc_mobile_items-number">2.5.</span> <span class="toc_mobile_items-text"> 显示文本</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#目录与文件"><span class="toc_mobile_items-number">2.6.</span> <span class="toc_mobile_items-text"> 目录与文件</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#捕获异常"><span class="toc_mobile_items-number">2.7.</span> <span class="toc_mobile_items-text"> 捕获异常</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#记住用户的设置"><span class="toc_mobile_items-number">2.8.</span> <span class="toc_mobile_items-text"> 记住用户的设置</span></a></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装-easygui"><span class="toc-number">1.</span> <span class="toc-text"> 安装 EasyGui</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入-easygui"><span class="toc-number">1.1.</span> <span class="toc-text"> 导入 EasyGui</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#各种功能演示"><span class="toc-number">1.2.</span> <span class="toc-text"> 各种功能演示</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-easygui"><span class="toc-number">2.</span> <span class="toc-text"> 使用 EasyGui</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用按钮组件"><span class="toc-number">2.1.</span> <span class="toc-text"> 使用按钮组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为用户提供一系列的选择"><span class="toc-number">2.2.</span> <span class="toc-text"> 为用户提供一系列的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让用户输入消息"><span class="toc-number">2.3.</span> <span class="toc-text"> 让用户输入消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让用户输入密码"><span class="toc-number">2.4.</span> <span class="toc-text"> 让用户输入密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示文本"><span class="toc-number">2.5.</span> <span class="toc-text"> 显示文本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录与文件"><span class="toc-number">2.6.</span> <span class="toc-text"> 目录与文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获异常"><span class="toc-number">2.7.</span> <span class="toc-text"> 捕获异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记住用户的设置"><span class="toc-number">2.8.</span> <span class="toc-text"> 记住用户的设置</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://api.dujin.org/bing/1366.php)"><div id="post-info"><div id="post-title"><div class="posttitle">Python GUI入门</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-10<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-02-10</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python学习/">Python学习</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="安装-easygui"><a class="markdownIt-Anchor" href="#安装-easygui"></a> 安装 EasyGui</h1>
+<p>EasyGui 可以直接使用 pip 工具安装，打开 CMD 命令行窗口，输入 <strong>pip install easygui</strong> 即可。</p>
+<ul>
+<li><strong>pip(the package installer for Python)</strong> 是 Python 的包管理工具，提供了对 Python 包的查找、下载、安装、卸载功能</li>
+</ul>
+<h2 id="导入-easygui"><a class="markdownIt-Anchor" href="#导入-easygui"></a> 导入 EasyGui</h2>
+<p>为了使用 EasyGui 这个模块，首先应当导入它，有三种方法：</p>
+<ol>
+<li><strong>import easygui</strong>
+<ul>
+<li>这种方法最为简单，但是使用 EasyGui 的函数时，必须加上前缀easygui</li>
+</ul>
+</li>
+<li><strong>from easygui import *</strong>
+<ul>
+<li>导入整个 EasyGui 包，能直接调用 EasyGui 的函数</li>
+<li>会污染命名空间</li>
+</ul>
+</li>
+<li><strong>import easygui as eg</strong>
+<ul>
+<li>建议这样操作，因为既可以保持 EasyGui 的命名空间，也可以减少前缀，直接使用 eg 前缀就可以了</li>
+</ul>
+</li>
+</ol>
+<h2 id="各种功能演示"><a class="markdownIt-Anchor" href="#各种功能演示"></a> 各种功能演示</h2>
+<p>调用 easygui.egdemo() 函数，就可以尝试 EasyGui 拥有的各种功能、</p>
+<h1 id="使用-easygui"><a class="markdownIt-Anchor" href="#使用-easygui"></a> 使用 EasyGui</h1>
+<h2 id="使用按钮组件"><a class="markdownIt-Anchor" href="#使用按钮组件"></a> 使用按钮组件</h2>
+<p>根据需求，EasyGui 在 buttonbox() 上建立了一系列的函数供调用</p>
+<ol>
+<li>
+<p><strong>msgbox()</strong></p>
+<blockquote>
+<p>msgbox(msg=’(Your message goes here)’, title=’ ', ok_button=‘OK’, image=None, root=None)</p>
+</blockquote>
+<ul>
+<li>msg：要显示的信息</li>
+<li>title：标题</li>
+<li>ok_button：可以重写确认按钮</li>
+</ul>
+</li>
+<li>
+<p><strong>ccbox()</strong></p>
+<blockquote>
+<p>ccbox(msg=‘Shall I continue?’, title=’ ', choices=(‘C[o]ntinue’, ‘C[a]ncel’), image=None, default_choice=‘Continue’, cancel_choice=‘Cancel’)</p>
+</blockquote>
+<ul>
+<li>继续选择框，提供两个选择：C[o]ntinue 或者 C[a]ncel，并相应的返回 True 或者 False</li>
+<li>C[o]tinue 中的 [o] 表示快捷键，按一下键盘的 o 相当于单机了 C[o]tinue 按钮</li>
+</ul>
+</li>
+<li>
+<p><strong>ynbox()</strong></p>
+<blockquote>
+<p>ynbox(msg=‘Shall I continue?’, title=’ ‘, choices=(’[<f1>]Yes’, ‘[<f2>]No’), image=None, default_choice=’[<f1>]Yes’, cancel_choice=’[<f2>]No’)</f2></f1></f2></f1></p>
+</blockquote>
+<ul>
+<li>与 ccbox() 一样，但是默认的 choices 参数不同</li>
+<li>这里的[<f1>]也是快捷键</f1></li>
+</ul>
+</li>
+<li>
+<p><strong>buttonbox()</strong></p>
+<blockquote>
+<p>buttonbox(msg=’’, title=’ ', choices=(‘Button[1]’, ‘Button[2]’, ‘Button[3]’), image=None, images=None, default_choice=None, cancel_choice=None, callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>使用 buttonbox() 可以自定义一组按钮，单机按钮返回按钮的值</li>
+<li>这里文档只有三个按钮，但是实测可以多个</li>
+<li>默认返回 None</li>
+</ul>
+</li>
+<li>
+<p><strong>indexbox()</strong></p>
+<blockquote>
+<p>indexbox(msg=‘Shall I continue?’, title=’ ', choices=(‘Yes’, ‘No’), image=None, default_choice=‘Yes’, cancel_choice=‘No’)</p>
+</blockquote>
+<ul>
+<li>基本与之前的相同，但是这里返回的索引值，而不是按钮的值</li>
+<li>第一个按钮返回索引值0，第二个返回1</li>
+</ul>
+</li>
+<li>
+<p><strong>boolbox()</strong></p>
+<blockquote>
+<p>boolbox(msg=‘Shall I continue?’, title=’ ‘, choices=(’[Y]es’, ‘[N]o’), image=None, default_choice=‘Yes’, cancel_choice=‘No’)</p>
+</blockquote>
+<ul>
+<li>如果第一个按钮被选中返回 True，否则返回 False</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>以上按钮组件都有一个 image 参数，可以传入图片的路径以显示图片</li>
+</ul>
+<h2 id="为用户提供一系列的选择"><a class="markdownIt-Anchor" href="#为用户提供一系列的选择"></a> 为用户提供一系列的选择</h2>
+<p>buttonbox() 为用于提供了一个简单的按钮选项，如果选项过多，就要采用可选择列表了</p>
+<ol>
+<li>
+<p><strong>choicebox()</strong></p>
+<blockquote>
+<p>choicebox(msg=‘Pick an item’, title=’’, choices=[], preselect=0, callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>向 choices 传入序列，这些选项会按字母（不区分大小写）进行排序</li>
+</ul>
+</li>
+<li>
+<p><strong>multchoicebox()</strong></p>
+<blockquote>
+<p>multchoicebox(msg=‘Pick an item’, title=’’, choices=[], preselect=0, callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>基本与 choicebox() 一致，但是 multchoicebox() 支持多选</li>
+</ul>
+</li>
+</ol>
+<h2 id="让用户输入消息"><a class="markdownIt-Anchor" href="#让用户输入消息"></a> 让用户输入消息</h2>
+<ol>
+<li>
+<p><strong>enterbox()</strong></p>
+<blockquote>
+<p>enterbox(msg=‘Enter something.’, title=’ ‘, default=’’, strip=True, image=None, root=None)</p>
+</blockquote>
+<ul>
+<li>提供一个最为简单的输入框，返回值为用户输入的字符串</li>
+<li>默认返回的值会去掉首位空格，若要保留空格的话，设置参数 strip=False</li>
+</ul>
+</li>
+<li>
+<p><strong>integerbox()</strong></p>
+<blockquote>
+<p>integerbox(msg=’’, title=’ ', default=None, lowerbound=0, upperbound=99, image=None, root=None)</p>
+</blockquote>
+<ul>
+<li>用于只能输入范围内的整数，否则会要求用户重新输入</li>
+<li>范围：lowerbound ~ upperbound</li>
+</ul>
+</li>
+<li>
+<p><strong>multenterbox()</strong></p>
+<blockquote>
+<p>multenterbox(msg=‘Fill in values for the fields.’, title=’ ', fields=[], values=[], callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>提供多个简单的输入框</li>
+<li>如果用户输入值比选项少，则返回列表中的值用空字符串填充为用户输入的项</li>
+<li>如果用户输入的值比选项多，则截断为选项的数量</li>
+<li>取消操作的话，返回域中列表的值或者 None 值</li>
+</ul>
+</li>
+</ol>
+<h2 id="让用户输入密码"><a class="markdownIt-Anchor" href="#让用户输入密码"></a> 让用户输入密码</h2>
+<ol>
+<li>
+<p><strong>passwordbox()</strong></p>
+<blockquote>
+<p>passwordbox(msg=‘Enter your password.’, title=’ ‘, default=’’, image=None, root=None)</p>
+</blockquote>
+<ul>
+<li>passwordbox() 与 enterbox() 样式一样，但是输入的内容是用星号(*)显示出来</li>
+</ul>
+</li>
+<li>
+<p><strong>multpasswordbox()</strong></p>
+<blockquote>
+<p>multpasswordbox(msg=‘Fill in values for the fields.’, title=’ ', fields=(), values=(), callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>multpasswordbox() 与 multenterbox() 采用相同的接口，但是它的最后一个输入框显示为密码的形式(*)</li>
+</ul>
+</li>
+</ol>
+<h2 id="显示文本"><a class="markdownIt-Anchor" href="#显示文本"></a> 显示文本</h2>
+<ol>
+<li>
+<p><strong>textbox()</strong></p>
+<blockquote>
+<p>textbox(msg=’’, title=’ ‘, text=’’, codebox=False, callback=None, run=True)</p>
+</blockquote>
+<ul>
+<li>默认会以比例字体（codebox=True 设置等宽字体）来显示文本，自动换行，适合于显示一般的书面文字</li>
+<li>有一个 textArea 组件，按 OK 的话会返回 None 或者 输入 textArea 的内容</li>
+</ul>
+</li>
+<li>
+<p><strong>codebox()</strong></p>
+<blockquote>
+<p>codebox(msg=’’, title=’ ‘, text=’’)</p>
+</blockquote>
+<ul>
+<li>以等宽字体显示文本内容，不自动换行，等宽字体适合于代码显示</li>
+<li>相当于 textbox(codebox = True)，与 textbox() 一样有一片 textArea</li>
+</ul>
+</li>
+</ol>
+<h2 id="目录与文件"><a class="markdownIt-Anchor" href="#目录与文件"></a> 目录与文件</h2>
+<p>GUI 编程中一个常见情景：要求用户输入目录及文件名。</p>
+<ol>
+<li>
+<p><strong>diropenbox()</strong></p>
+<blockquote>
+<p>diropenbox(msg=None, title=None, default=None)</p>
+</blockquote>
+<ul>
+<li>提供一个对话框，返回用户选择的目录名（带完整路径），如选择 Cancel，则返回 None</li>
+<li>default 设置默认打开目录（确保目录已存在）</li>
+</ul>
+</li>
+<li>
+<p><strong>fileopenbox()</strong></p>
+<blockquote>
+<p>fileopenbox(msg=None, title=None, default=’*’, filetypes=None, multiple=False)</p>
+</blockquote>
+<ul>
+<li>提供一个对话框，返回用户选择的文件名（带完整路径），如选择 Cancel，则返回 None</li>
+<li>关于 default 参数的设置方法：
+<ol>
+<li>指定一个默认路径，通常包含<strong>一个或多个通配符</strong>（通配符是一种特殊语句，主要有星号(*)和问号(?)，用来模糊搜索文件）</li>
+<li>如果设置了 default 参数，fileopenbox() 会<strong>显示默认的文件路径和格式</strong></li>
+<li>default 默认参数是 ‘*’，即匹配所有格式的文件。</li>
+</ol>
+<ul>
+<li>例如
+<ul>
+<li>default=‘c:/eason/*.py’ 即显示 c:/eason 文件夹下所有的 Python 源文件</li>
+<li>default=‘c:/eason/test*.py’ 即显示 c:/eason 文件夹下所有的以test开头的 Python 源文件（同样也可以设置xx结尾的）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关于 filetypes 参数的设置方法：
+<ol>
+<li>可以是包含文件掩码的字符串列表，如：filetypes = [’*.txt’]</li>
+<li>可以是字符串列表，列表的最后一项字符串是文件类型的描述，如：[&quot;*.css&quot;, [&quot;*.htm&quot;, “*.html”, “HTML files”]]（HTML files就是对前面两种文件类型的描述）</li>
+</ol>
+</li>
+<li>multiple 参数设置是否可以多选</li>
+</ul>
+</li>
+<li>
+<p><strong>filesavebox()</strong></p>
+<blockquote>
+<p>filesavebox(msg=None, title=None, default=’’, filetypes=None)</p>
+</blockquote>
+<ul>
+<li>提供一个对话框，用于选择文件需要保存的路径</li>
+<li>default 参数应该包含一个文件名（如当前需要保存的文件名），当然也可以为空，或者是一个文件格式掩码的通配符</li>
+<li>filetypes 参数的设置参照 fileopenbox()</li>
+</ul>
+</li>
+</ol>
+<h2 id="捕获异常"><a class="markdownIt-Anchor" href="#捕获异常"></a> 捕获异常</h2>
+<p>使用 EasyGui 编写 GUI 时难免会产生异常，当程序崩溃时，堆栈追踪可能会被抛出，或者被写入 stdout 标准输出函数中。<br>
+EasyGui 通过 exceptionbox() 将堆栈追踪显示在一个 codebox() 中，并且允许做进一步的处理</p>
+<blockquote>
+<p>exceptionbox(msg=None, title=None)<br>
+Display a box that gives information about<br>
+an exception that has just been raised.</p>
+</blockquote>
+<h2 id="记住用户的设置"><a class="markdownIt-Anchor" href="#记住用户的设置"></a> 记住用户的设置</h2>
+<p>GUI 编程中一个常见情景：要求用户设置参数，然后保存下来，以便下次用户使用<br>
+EasyGui 提供了一个名为 <strong>EgStore</strong> 的类。应用程序必须定义一个类<strong>继承 EgStore 类</strong>，并创建一个该类的<strong>实例化对象</strong><br>
+设置类的 <strong>构造函数（__init__ 方法）</strong> 必须初始化所有想要记住的那些值。这样这可以在对象中设定值去实例化变量，之后使用 <strong>store()</strong> 方法在硬盘中持久化存储。</p>
+<ul>
+<li>
+<p>保存设置</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> easygui <span class="keyword">as</span> eg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Settings</span><span class="params">(eg.EgStore)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, filename)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 实例化变量</span></span><br><span class="line">        self.author = <span class="string">''</span></span><br><span class="line">        self.book = <span class="string">''</span></span><br><span class="line">        self.filename = filename</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取保存的文件，第一次打开时为空</span></span><br><span class="line">        <span class="comment"># 第二次以后恢复filename中的内容</span></span><br><span class="line">        self.restore()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">settingsFilename = <span class="string">'setting.txt'</span></span><br><span class="line">settings = Settings(settingsFilename)</span><br><span class="line">settings.author = <span class="string">'Eason'</span></span><br><span class="line">settings.book = <span class="string">'《凯莉生气的十万个原因》'</span></span><br><span class="line">settings.store()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>恢复设置</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">settingsFilename = <span class="string">'setting.txt'</span></span><br><span class="line">settings = Settings(settingsFilename)</span><br><span class="line">print(settings.author)</span><br><span class="line">print(settings.book)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/10/学习/Python学习/Python GUI入门/">http://yoursite.com/2020/02/10/学习/Python学习/Python GUI入门/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/11/学习/Python学习/Python类和对象/"><img class="prev_cover lazyload" data-src="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>Python类和对象</span></div></a></div><div class="next-post pull_right"><a href="/2020/02/08/学习/Python学习/Python异常处理/"><img class="next_cover lazyload" data-src="https://api.dujin.org/bing/1366.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Python异常处理</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

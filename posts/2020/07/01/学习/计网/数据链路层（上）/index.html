@@ -1,0 +1,657 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>数据链路层（上） | Nice To Meet U</title><meta name="description" content="数据链路层（上）"><meta name="keywords" content="计网"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="数据链路层（上）"><meta name="twitter:description" content="数据链路层（上）"><meta name="twitter:image" content="https://api.dujin.org/bing/1366.php"><meta property="og:type" content="article"><meta property="og:title" content="数据链路层（上）"><meta property="og:url" content="http://yoursite.com/2020/07/01/学习/计网/数据链路层（上）/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="数据链路层（上）"><meta property="og:image" content="https://api.dujin.org/bing/1366.php"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/07/01/学习/计网/数据链路层（上）/"><link rel="prev" title="应用层" href="http://yoursite.com/2020/07/01/学习/计网/应用层/"><link rel="next" title="数据链路层（下）" href="http://yoursite.com/2020/07/01/学习/计网/数据链路层（下）/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#概述"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 概述</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#基本概念"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text"> 基本概念</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#功能概述"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text"> 功能概述</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#帧"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 帧</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#透明传输"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text"> 透明传输</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#字符计数法"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text"> 字符计数法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#带字节字符填充的标志字节法"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text"> 带字节/字符填充的标志字节法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#带位填充的标志比特法"><span class="toc_mobile_items-number">2.4.</span> <span class="toc_mobile_items-text"> 带位填充的标志比特法</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#物理层编码违例法"><span class="toc_mobile_items-number">2.5.</span> <span class="toc_mobile_items-text"> 物理层编码违例法</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#差错控制"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 差错控制</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#差错从何而来"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text"> 差错从何而来？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#差错控制核心"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text"> 差错控制核心</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#检错码"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text"> 检错码</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#奇偶检验码"><span class="toc_mobile_items-number">3.3.1.</span> <span class="toc_mobile_items-text"> 奇偶检验码</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#crc-循环冗余码"><span class="toc_mobile_items-number">3.3.2.</span> <span class="toc_mobile_items-text"> CRC 循环冗余码</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#工作原理"><span class="toc_mobile_items-number">3.3.2.1.</span> <span class="toc_mobile_items-text"> 工作原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#步骤"><span class="toc_mobile_items-number">3.3.2.2.</span> <span class="toc_mobile_items-text"> 步骤</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#帧检验序列-fcs"><span class="toc_mobile_items-number">3.3.2.3.</span> <span class="toc_mobile_items-text"> 帧检验序列 FCS</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#检错"><span class="toc_mobile_items-number">3.3.2.4.</span> <span class="toc_mobile_items-text"> 检错</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#注意"><span class="toc_mobile_items-number">3.3.2.5.</span> <span class="toc_mobile_items-text"> 注意</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#纠错码-海明码"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text"> 纠错码 — 海明码</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#流量控制"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> 流量控制</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#停止-等待协议"><span class="toc_mobile_items-number">4.1.</span> <span class="toc_mobile_items-text"> 停止-等待协议</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#滑动窗口"><span class="toc_mobile_items-number">4.2.</span> <span class="toc_mobile_items-text"> 滑动窗口</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#链路层服务"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text"> 链路层服务</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#无确认无连接"><span class="toc_mobile_items-number">5.1.</span> <span class="toc_mobile_items-text"> 无确认无连接</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#有确认无连接"><span class="toc_mobile_items-number">5.2.</span> <span class="toc_mobile_items-text"> 有确认无连接</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#有确认有连接"><span class="toc_mobile_items-number">5.3.</span> <span class="toc_mobile_items-text"> 有确认有连接</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#数据链路层协议"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text"> 数据链路层协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#停-等协议"><span class="toc_mobile_items-number">6.1.</span> <span class="toc_mobile_items-text"> 停-等协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议1一个无限制的单工信道"><span class="toc_mobile_items-number">6.1.1.</span> <span class="toc_mobile_items-text"> 协议1：一个无限制的单工信道</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议2单工停-等协议"><span class="toc_mobile_items-number">6.1.2.</span> <span class="toc_mobile_items-text"> 协议2：单工停-等协议</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议3有噪信道上的单工协议"><span class="toc_mobile_items-number">6.1.3.</span> <span class="toc_mobile_items-text"> 协议3：有噪信道上的单工协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#发送方"><span class="toc_mobile_items-number">6.1.3.1.</span> <span class="toc_mobile_items-text"> 发送方</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#接收方"><span class="toc_mobile_items-number">6.1.3.2.</span> <span class="toc_mobile_items-text"> 接收方</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#滑动窗口协议"><span class="toc_mobile_items-number">6.2.</span> <span class="toc_mobile_items-text"> 滑动窗口协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议4停止-等待式-arq"><span class="toc_mobile_items-number">6.2.1.</span> <span class="toc_mobile_items-text"> 协议4：停止-等待式 ARQ</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#基本概念-2"><span class="toc_mobile_items-number">6.2.1.1.</span> <span class="toc_mobile_items-text"> 基本概念</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#基本工作原理"><span class="toc_mobile_items-number">6.2.1.2.</span> <span class="toc_mobile_items-text"> 基本工作原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#要点"><span class="toc_mobile_items-number">6.2.1.3.</span> <span class="toc_mobile_items-text"> 要点</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#优缺点"><span class="toc_mobile_items-number">6.2.1.4.</span> <span class="toc_mobile_items-text"> 优缺点</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议5回退-n-帧协议"><span class="toc_mobile_items-number">6.2.2.</span> <span class="toc_mobile_items-text"> 协议5：回退 N 帧协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#基本概念-3"><span class="toc_mobile_items-number">6.2.2.1.</span> <span class="toc_mobile_items-text"> 基本概念</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#工作原理-2"><span class="toc_mobile_items-number">6.2.2.2.</span> <span class="toc_mobile_items-text"> 工作原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#注意点"><span class="toc_mobile_items-number">6.2.2.3.</span> <span class="toc_mobile_items-text"> 注意点</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#协议6选择重传协议"><span class="toc_mobile_items-number">6.2.3.</span> <span class="toc_mobile_items-text"> 协议6：选择重传协议</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#工作原理-3"><span class="toc_mobile_items-number">6.2.3.1.</span> <span class="toc_mobile_items-text"> 工作原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#重点"><span class="toc_mobile_items-number">6.2.3.2.</span> <span class="toc_mobile_items-text"> 重点</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#窗口大小"><span class="toc_mobile_items-number">6.2.3.3.</span> <span class="toc_mobile_items-text"> 窗口大小</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#回退-n-帧-vs-选择重传"><span class="toc_mobile_items-number">6.2.3.4.</span> <span class="toc_mobile_items-text"> 回退 N 帧 VS 选择重传</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#信道利用率"><span class="toc_mobile_items-number">6.2.4.</span> <span class="toc_mobile_items-text"> 信道利用率</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#链路利用率"><span class="toc_mobile_items-number">6.2.5.</span> <span class="toc_mobile_items-text"> 链路利用率</span></a></li></ol></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text"> 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.</span> <span class="toc-text"> 基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能概述"><span class="toc-number">1.2.</span> <span class="toc-text"> 功能概述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#帧"><span class="toc-number">2.</span> <span class="toc-text"> 帧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#透明传输"><span class="toc-number">2.1.</span> <span class="toc-text"> 透明传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符计数法"><span class="toc-number">2.2.</span> <span class="toc-text"> 字符计数法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#带字节字符填充的标志字节法"><span class="toc-number">2.3.</span> <span class="toc-text"> 带字节/字符填充的标志字节法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#带位填充的标志比特法"><span class="toc-number">2.4.</span> <span class="toc-text"> 带位填充的标志比特法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#物理层编码违例法"><span class="toc-number">2.5.</span> <span class="toc-text"> 物理层编码违例法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#差错控制"><span class="toc-number">3.</span> <span class="toc-text"> 差错控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#差错从何而来"><span class="toc-number">3.1.</span> <span class="toc-text"> 差错从何而来？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#差错控制核心"><span class="toc-number">3.2.</span> <span class="toc-text"> 差错控制核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检错码"><span class="toc-number">3.3.</span> <span class="toc-text"> 检错码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#奇偶检验码"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 奇偶检验码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crc-循环冗余码"><span class="toc-number">3.3.2.</span> <span class="toc-text"> CRC 循环冗余码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理"><span class="toc-number">3.3.2.1.</span> <span class="toc-text"> 工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤"><span class="toc-number">3.3.2.2.</span> <span class="toc-text"> 步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#帧检验序列-fcs"><span class="toc-number">3.3.2.3.</span> <span class="toc-text"> 帧检验序列 FCS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检错"><span class="toc-number">3.3.2.4.</span> <span class="toc-text"> 检错</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">3.3.2.5.</span> <span class="toc-text"> 注意</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纠错码-海明码"><span class="toc-number">3.4.</span> <span class="toc-text"> 纠错码 — 海明码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#流量控制"><span class="toc-number">4.</span> <span class="toc-text"> 流量控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#停止-等待协议"><span class="toc-number">4.1.</span> <span class="toc-text"> 停止-等待协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动窗口"><span class="toc-number">4.2.</span> <span class="toc-text"> 滑动窗口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链路层服务"><span class="toc-number">5.</span> <span class="toc-text"> 链路层服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#无确认无连接"><span class="toc-number">5.1.</span> <span class="toc-text"> 无确认无连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有确认无连接"><span class="toc-number">5.2.</span> <span class="toc-text"> 有确认无连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有确认有连接"><span class="toc-number">5.3.</span> <span class="toc-text"> 有确认有连接</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据链路层协议"><span class="toc-number">6.</span> <span class="toc-text"> 数据链路层协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#停-等协议"><span class="toc-number">6.1.</span> <span class="toc-text"> 停-等协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协议1一个无限制的单工信道"><span class="toc-number">6.1.1.</span> <span class="toc-text"> 协议1：一个无限制的单工信道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议2单工停-等协议"><span class="toc-number">6.1.2.</span> <span class="toc-text"> 协议2：单工停-等协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议3有噪信道上的单工协议"><span class="toc-number">6.1.3.</span> <span class="toc-text"> 协议3：有噪信道上的单工协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#发送方"><span class="toc-number">6.1.3.1.</span> <span class="toc-text"> 发送方</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接收方"><span class="toc-number">6.1.3.2.</span> <span class="toc-text"> 接收方</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动窗口协议"><span class="toc-number">6.2.</span> <span class="toc-text"> 滑动窗口协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协议4停止-等待式-arq"><span class="toc-number">6.2.1.</span> <span class="toc-text"> 协议4：停止-等待式 ARQ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念-2"><span class="toc-number">6.2.1.1.</span> <span class="toc-text"> 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本工作原理"><span class="toc-number">6.2.1.2.</span> <span class="toc-text"> 基本工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#要点"><span class="toc-number">6.2.1.3.</span> <span class="toc-text"> 要点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优缺点"><span class="toc-number">6.2.1.4.</span> <span class="toc-text"> 优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议5回退-n-帧协议"><span class="toc-number">6.2.2.</span> <span class="toc-text"> 协议5：回退 N 帧协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念-3"><span class="toc-number">6.2.2.1.</span> <span class="toc-text"> 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理-2"><span class="toc-number">6.2.2.2.</span> <span class="toc-text"> 工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意点"><span class="toc-number">6.2.2.3.</span> <span class="toc-text"> 注意点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议6选择重传协议"><span class="toc-number">6.2.3.</span> <span class="toc-text"> 协议6：选择重传协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理-3"><span class="toc-number">6.2.3.1.</span> <span class="toc-text"> 工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重点"><span class="toc-number">6.2.3.2.</span> <span class="toc-text"> 重点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#窗口大小"><span class="toc-number">6.2.3.3.</span> <span class="toc-text"> 窗口大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回退-n-帧-vs-选择重传"><span class="toc-number">6.2.3.4.</span> <span class="toc-text"> 回退 N 帧 VS 选择重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信道利用率"><span class="toc-number">6.2.4.</span> <span class="toc-text"> 信道利用率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链路利用率"><span class="toc-number">6.2.5.</span> <span class="toc-text"> 链路利用率</span></a></li></ol></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://api.dujin.org/bing/1366.php)"><div id="post-info"><div id="post-title"><div class="posttitle">数据链路层（上）</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-07-01<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-07-22</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/计算机网络/">计算机网络</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<h2 id="基本概念"><a class="markdownIt-Anchor" href="#基本概念"></a> 基本概念</h2>
+<ul>
+<li><strong>结点</strong>：主机、路由器</li>
+<li><strong>链路</strong>：网络中两个结点之间的 <strong>物理通道</strong>
+<ul>
+<li>链路的传输介质主要有双绞线、光纤和微波</li>
+<li>分为有线链路和无线链路</li>
+</ul>
+</li>
+<li><strong>数据链路</strong>：网络中两个结点之间的 <strong>逻辑通道</strong>，把实现控制数据传输<strong>协议</strong>的硬件和软件加到链路上就构成了数据链路</li>
+<li><strong>帧(frame)</strong>：链路层的 <strong>协议数据单元(PDU)</strong>，封装网络层数据报</li>
+<li>三个基本问题：封装成帧、透明传输、差错控制</li>
+</ul>
+<p><strong>数据链路层</strong> 负责通过一条链路从一个结点向另一个物理链路直接相连的相邻结点传送数据报</p>
+<h2 id="功能概述"><a class="markdownIt-Anchor" href="#功能概述"></a> 功能概述</h2>
+<p>数据链路层在物理层提供服务的基础上 <strong>向网络层提供服务</strong>，其最基本的功能是将源自网络层的数据 <strong>可靠</strong> 地传输到相邻结点的目标机网络层。其主要作用是 <strong>加强物理层传输原始比特流的功能</strong>，将物理层提供的可能出错的物理连接改造成为 <strong>逻辑上无差错的数据链路</strong>，使之对网络层表现为一条无差错的链路</p>
+<ul>
+<li>功能一：为网络层提供服务。<strong>无确认无连接服务，有确认无连接服务，有确认面向连接服务</strong>
+<ul>
+<li>有连接必然有确认</li>
+</ul>
+</li>
+<li>功能二：链路管理，即连接的创建、维持、释放（用于面向连接的服务）</li>
+<li>功能三：组帧</li>
+<li>功能四：流量控制（限制发送方）</li>
+<li>功能五：差错控制（帧错/位错）</li>
+</ul>
+<h1 id="帧"><a class="markdownIt-Anchor" href="#帧"></a> 帧</h1>
+<p><strong>封装成帧</strong> 就是在一段数据的前后部分添加首部和尾部，这样就形成了一个帧。接收端在收到物理层上交的比特流后，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束</p>
+<ul>
+<li>首部和尾部包含许多的控制信息，他们的一个重要作用：<strong>帧定界</strong>（确认帧的界限）</li>
+<li><strong>帧同步</strong>：<em>接收方</em>应当能从接收到的二进制比特流中区分出帧的起始和结束</li>
+</ul>
+<p><img alt data-src="https://cdn.jsdelivr.net/gh/easonzzzz/BlogPic/img/20200316101506.png" class="lazyload"></p>
+<ul>
+<li>帧中的语法成分称为域或字段 (field)</li>
+<li>帧浓缩了与数据链路层功能实现相关的各种机制</li>
+<li>帧提高了数据处理和传输的效率</li>
+<li>不同的链路层协议的帧格式可能会存在微小的区别</li>
+</ul>
+<p><img alt data-src="https://cdn.jsdelivr.net/gh/easonzzzz/BlogPic/img/20200316102111.png" class="lazyload"></p>
+<ul>
+<li>MTU：最大传输单元（Maximum Transmission Unit）</li>
+</ul>
+<p>组帧的四种方法：</p>
+<ol>
+<li><strong>字符计数法</strong></li>
+<li><strong>带字节/字符填充的标志字节法</strong></li>
+<li><em><strong>带位填充的标志比特法</strong></em></li>
+<li><em><strong>物理层编码违例法</strong></em></li>
+</ol>
+<h2 id="透明传输"><a class="markdownIt-Anchor" href="#透明传输"></a> 透明传输</h2>
+<p><strong>透明传输</strong> 是指不管所传数据是什么样子的比特组合，都应当能够在无差错的在链路上传送。因此，链路层就“看不见”有什么东西妨碍数据的传输。</p>
+<p>当所传数据中的比特组合恰巧与某一个控制信息完全一样时，就必须采取恰当的措施，使收方不会将这样的数据误认为是某种控制信息。这样才能保证数据链路层的传输是透明的。</p>
+<h2 id="字符计数法"><a class="markdownIt-Anchor" href="#字符计数法"></a> 字符计数法</h2>
+<p>帧首部使用一个计数字段（第一个<strong>字节</strong>，八位）来标明帧内字符数</p>
+<ul>
+<li>如果发生传输错误，则可能改变帧长的值，从而导致帧的同步出现问题</li>
+</ul>
+<h2 id="带字节字符填充的标志字节法"><a class="markdownIt-Anchor" href="#带字节字符填充的标志字节法"></a> 带字节/字符填充的标志字节法</h2>
+<p>每一帧以ASCII字符序列特殊的标志字节 <strong>FLAG + Header</strong> (SOH) 开始，以 <strong>FLAG + Trailer</strong> (EOT) 结束</p>
+<ul>
+<li>缺点是成帧完全依赖于 FLAG 字符，而且若数据部分出现 FLAG，则接收端就会错误判断边界</li>
+</ul>
+<p><strong>字符填充法</strong> 可用于解决上述问题。即发送端<strong>在数据中所遇到的 FLAG 前再插入一个附加的 ESC</strong>，因此只要看到 FLAG 前有没有 ESC，就可以判断它是不是一个帧界符</p>
+<ul>
+<li>遇到的 ESC 前面再加上一个 ESC，则接收端则忽略两个连续的 ESC 的前一个</li>
+<li><strong>任意比特数的帧不适用</strong>，必须是 <strong>8位</strong> 整数倍</li>
+</ul>
+<h2 id="带位填充的标志比特法"><a class="markdownIt-Anchor" href="#带位填充的标志比特法"></a> 带位填充的标志比特法</h2>
+<p>每一帧使用一个 <strong>特殊的位模式“01111110”</strong> 作为开始和结束标记，又称为 flag</p>
+<ul>
+<li>允许数据帧包含 <strong>任意个数</strong> 的比特，也允许每个字符采用任意比特的编码</li>
+</ul>
+<p>当然这种方法当数据中出现 flag 时会混淆，所以采用 <strong>位填充法</strong> 解决：</p>
+<ol>
+<li>在发送端，扫描整个信息字段，只要连续五个 1，就在其后填入一个 0，即 <strong>“逢五 1 插 0”</strong></li>
+<li>接收端先找到标志字段确定边界，然后扫描比特流，发现连续 5 个 1 时，就把后面的 0 删除，即 <strong>“逢五 1 删 0”</strong></li>
+</ol>
+<h2 id="物理层编码违例法"><a class="markdownIt-Anchor" href="#物理层编码违例法"></a> 物理层编码违例法</h2>
+<p>利用物理层信息编码中<strong>未用的电信号</strong>来作为帧的边界</p>
+<p>采用冗余编码技术，如曼切斯特编码，其中：数据 0：低-高电平对；数据 1：高-低电平对</p>
+<p><strong>高-高电平对</strong> 和 <strong>低-低电平对</strong> 没有使用，这两种违例编码真号可用作帧界符</p>
+<ul>
+<li>在令牌环网中使用编码违例格式</li>
+</ul>
+<h1 id="差错控制"><a class="markdownIt-Anchor" href="#差错控制"></a> 差错控制</h1>
+<h2 id="差错从何而来"><a class="markdownIt-Anchor" href="#差错从何而来"></a> 差错从何而来？</h2>
+<p>概括来说，传输中的差错是由于噪声引起的<br>
+<strong>全局性</strong>：由于线路本身电气特性所产生的 <strong>随机噪声（热噪声）</strong>，是信道固有的，随机存在的。</p>
+<ul>
+<li>解决方法：提高信噪比来减少或避免干扰（对传感器下手）</li>
+</ul>
+<p><strong>局部性</strong>：外界特定的短暂原因所造成的 <strong>冲击噪声</strong>，是产生差错的主要原因</p>
+<ul>
+<li>解决方法：通常利用编码技术解决</li>
+</ul>
+<p>差错分为：</p>
+<ul>
+<li><strong>位错</strong>：比特位出错</li>
+<li><strong>帧错</strong>：丢失、重复、失序</li>
+</ul>
+<h2 id="差错控制核心"><a class="markdownIt-Anchor" href="#差错控制核心"></a> 差错控制核心</h2>
+<p>发送端对传送的数据信息加上与其满足一定关系的冗余码，形成一个加强的、符合一定规律的发送序列。<br>
+所加入的冗余码称为 <strong>校验码</strong>。</p>
+<p>接收端利用相同的规律进行检查从而发现错误。</p>
+<ul>
+<li>
+<p>检验码按校验错误能力的不同分为:</p>
+<ul>
+<li>检错码：可以发现传输中的错误，但不能自动纠正所发现的错误。
+<ul>
+<li>奇偶校验码、循环冗余码 CRC</li>
+</ul>
+</li>
+<li>纠错码：不仅能发现传输中的错误，还能利用纠错码中的信息自动纠正错误。
+<ul>
+<li>海明码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>物理层中的编码是针对 <strong>单个比特</strong>，解决的是比特同步问题；而链路层中针对的是 <strong>一组比特</strong>，解决的是传输过程中的差错控制。</p>
+</li>
+</ul>
+<h2 id="检错码"><a class="markdownIt-Anchor" href="#检错码"></a> 检错码</h2>
+<h3 id="奇偶检验码"><a class="markdownIt-Anchor" href="#奇偶检验码"></a> 奇偶检验码</h3>
+<p><strong>水平奇偶检验</strong>：<br>
+在每个字符的 7 位信息码后附加一个校验位 0 或 1 ，使整个字符中“1”的个数构成奇数个（奇校验）或偶数个（偶校验）。</p>
+<ul>
+<li>1 位检验 7 位</li>
+<li>只能检查出 <strong>奇数个比特</strong> 错误，检错能力为 <strong>50%</strong></li>
+</ul>
+<p><strong>垂直奇偶校验</strong>：<br>
+在发送字符块的末尾附加一个校验字符，且该字符中的第i位是针对所有字符的第i位所进行的校验。</p>
+<p><strong>垂直水平奇偶校验</strong>：<br>
+垂直奇偶校验和水平奇偶校验技术的综合。对每个字符作垂直校验，对整个字符块作水平校验。</p>
+<h3 id="crc-循环冗余码"><a class="markdownIt-Anchor" href="#crc-循环冗余码"></a> CRC 循环冗余码</h3>
+<p>全称 Cyclic Redundancy Check</p>
+<h4 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> 工作原理</h4>
+<ul>
+<li>多项式除法：<strong>被除多项式 = 除式 * 商 + 剩余多项式</strong></li>
+<li>通信双方约定除式，也就是 <strong>生成多项式</strong>，发送方将数据处理作为冗余信息发送给接收方</li>
+<li>接收方验证所受到的多项式能否为除式所整除，以判断传输过程是否出错</li>
+</ul>
+<h4 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h4>
+<ol>
+<li><strong>加 0</strong> ：若生成多项式 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 的阶为 r，将信息位左移 r 位，即 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>x</mi><mi>r</mi></msup><mi>M</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x^r M(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>
+<ul>
+<li>生成多项式的阶为最高不为 0 位的阶</li>
+</ul>
+</li>
+<li><strong>模 2 除法</strong>：求余数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>；余数由下式获得：$$ \frac{x^r M(x)}{G(x)} = Q(x) + r(x)$$
+<ul>
+<li>模 2 除法即<strong>异或</strong>：同 0 异 1</li>
+</ul>
+</li>
+<li>根据 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mi>r</mi></msup><mi>M</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>r</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(x) = x^rM(x) + r(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>，求出最终要发送的数据
+<ul>
+<li><strong>最终发送的数据 = 要发送的数据 + 帧检验序列FCS</strong></li>
+</ul>
+</li>
+</ol>
+<h4 id="帧检验序列-fcs"><a class="markdownIt-Anchor" href="#帧检验序列-fcs"></a> 帧检验序列 FCS</h4>
+<p>在数据后面添加上的冗余码称为 <strong>帧检验序列 FCS(Frame Check Sequence)</strong></p>
+<ul>
+<li>CRC 是一种常用的 <strong>检错方法</strong>，而 FCS 是添加在数据后面的 <strong>冗余码</strong>。</li>
+<li>FCS 可以用 CRC 这种方法得出，但 CRC 并非用来获得 FCS 的惟一方法</li>
+</ul>
+<h4 id="检错"><a class="markdownIt-Anchor" href="#检错"></a> 检错</h4>
+<p>只要接收方将得到的数据模2除生成多项式，得到的<strong>余数 R 不为 0</strong>，就表示检测到了差错，但是不能确定出错的比特。<br>
+一旦出现差错，就<strong>丢弃</strong>这个出现差错的帧。</p>
+<h4 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h4>
+<p>CRC 只能做到无差错<strong>接受</strong>，不代表可靠传输</p>
+<ul>
+<li>“无差错接受”是指：“凡是接受的帧（即<strong>不包括丢弃的帧</strong>），我们都能以<strong>非常接近于 1 的概率</strong>认为这些帧在传输过程中没有产生差错”</li>
+<li>要做到<strong>可靠传输</strong>，必须加上<strong>确认</strong>和<strong>重传</strong>机制</li>
+</ul>
+<h2 id="纠错码-海明码"><a class="markdownIt-Anchor" href="#纠错码-海明码"></a> 纠错码 — 海明码</h2>
+<p>海明码：<strong>发现双</strong> 比特错，<strong>纠正单</strong> 比特错</p>
+<ul>
+<li>海明不等式：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup><mo>≥</mo><mi>k</mi><mo>+</mo><mi>r</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^k \geq k+r+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.985078em;vertical-align:-0.13597em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+<p>海明码三要素：</p>
+<ol>
+<li>添加k位校验位：<strong>2^k ≥ n+k+1</strong> [传输n位，分成k组]</li>
+<li>检测位的位置：<strong>2^i</strong> (i=0,1,……) [这一位不与其他组共用]</li>
+</ol>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>1</mn></msub><mi mathvariant="normal">：</mi><mn>1</mn><mi mathvariant="normal">，</mi><mn>3</mn><mi mathvariant="normal">，</mi><mn>5</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>9</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{1}检测的g_{1}：1，3，5，7，9……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">1</span><span class="mord cjk_fallback">，</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">5</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">9</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>2</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>2</mn></msub><mi mathvariant="normal">：</mi><mn>2</mn><mi mathvariant="normal">，</mi><mn>3</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>10</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{2}检测的g_{2}：2，3，6，7，10……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">2</span><span class="mord cjk_fallback">，</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>4</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>3</mn></msub><mi mathvariant="normal">：</mi><mn>4</mn><mi mathvariant="normal">，</mi><mn>5</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>12</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{4}检测的g_{3}：4，5，6，7，12……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">4</span><span class="mord cjk_fallback">，</span><span class="mord">5</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>8</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>4</mn></msub><mi mathvariant="normal">：</mi><mn>8</mn><mi mathvariant="normal">，</mi><mn>9</mn><mi mathvariant="normal">，</mi><mn>10</mn><mi mathvariant="normal">，</mi><mn>11</mn><mi mathvariant="normal">，</mi><mn>12</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{8}检测的g_{4}：8，9，10，11，12……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">8</span><span class="mord cjk_fallback">，</span><span class="mord">9</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">0</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">1</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+</ul>
+<ol start="3">
+<li>检测位的取值：所在小组中承担的 <strong>奇偶校验任务</strong> 有关</li>
+</ol>
+<h1 id="流量控制"><a class="markdownIt-Anchor" href="#流量控制"></a> 流量控制</h1>
+<p><strong>较高的发送速度</strong> 和 <strong>较低的接收能力</strong> 的不匹配，会造成传输出错。</p>
+<ul>
+<li>数据链路层的流量控制是 <strong>点对点</strong>，而传输层的流量控制是 <strong>端到端</strong> 的
+<ul>
+<li>数据链路层：接收方收不下就不回复确认</li>
+<li>传输层：接收端给发送端一个窗口公告</li>
+</ul>
+</li>
+</ul>
+<h2 id="停止-等待协议"><a class="markdownIt-Anchor" href="#停止-等待协议"></a> 停止-等待协议</h2>
+<p>每发送完一个帧就停止发送，等待对方的确认，在收到确后再发送下一帧</p>
+<ul>
+<li>特殊的滑动窗口：发送窗口和接收窗口都是一帧</li>
+</ul>
+<h2 id="滑动窗口"><a class="markdownIt-Anchor" href="#滑动窗口"></a> 滑动窗口</h2>
+<p>发送、接收双方保持着一组同样的序列号，各自维持着一个窗口：发送窗口和接收窗口</p>
+<ul>
+<li>确认帧到达后，发送窗口向前滑动一格</li>
+<li>帧被正确接收，接收窗口向前滑动一格</li>
+<li>只有在接收窗口向前滑动时，发送窗口的下限才有可能向前滑动</li>
+</ul>
+<p><strong>后退 N 帧协议（GBN）</strong>：发送窗口大小 &gt; 1，接受窗口大小 = 1</p>
+<p><strong>选择重传协议（SR）</strong>：发送窗口大小 &gt; 1，接受窗口大小 &gt; 1</p>
+<ul>
+<li>实现流量控制（收不下就不给确认）、可靠传输（发送方自动重传）</li>
+</ul>
+<h1 id="链路层服务"><a class="markdownIt-Anchor" href="#链路层服务"></a> 链路层服务</h1>
+<ul>
+<li><strong>无确认的无连接服务(Unacknowledged connectionless service)</strong></li>
+<li><strong>有确认的无连接服务(Acknowledged connectionless service)</strong></li>
+<li><strong>有确认的面向连接的服务(Acknowledged connection-oriented service)</strong></li>
+</ul>
+<h2 id="无确认无连接"><a class="markdownIt-Anchor" href="#无确认无连接"></a> 无确认无连接</h2>
+<p>源机器向目标机器发送独立的数据帧，而目的机器不对收到的帧作确认。</p>
+<p>由于线路上的噪声而造成的帧丢失，数据链路层不作努力去恢复，而将该工作留给 <strong>上层</strong>（通常为传输层）。</p>
+<p>事先不存在建立连接，事后也不存在释放。</p>
+<ul>
+<li>适用于误码率较低的信道，如大多数的局域网中</li>
+</ul>
+<h2 id="有确认无连接"><a class="markdownIt-Anchor" href="#有确认无连接"></a> 有确认无连接</h2>
+<p>事先不存在建立连接，事后也不存在释放。</p>
+<p>源机器向目标机器发送独立的数据帧，但目的机器对收到的每一帧作 <strong>确认</strong>。</p>
+<p>若某个确定的时间间隔内未能收到确认帧（超时），则发送方自动重发。</p>
+<ul>
+<li>适用于无线通信系统之类的不可靠信道</li>
+</ul>
+<h2 id="有确认有连接"><a class="markdownIt-Anchor" href="#有确认有连接"></a> 有确认有连接</h2>
+<p>传送数据前，事先要建立一条连接。</p>
+<p>在连接上所传送的每一帧都要编上号，提供相应的确认和流量控制机制来保证每一帧都只被正确地接收一次，并保证所有帧都按正确的顺序被接收 。</p>
+<p>数据传输完成之后，需要释放所建立的连接。</p>
+<ul>
+<li>真正为网络层提供了可靠的无差错传输服务。</li>
+<li>适用于误码率较高的不可靠信道，如某些广域网链路。</li>
+</ul>
+<h1 id="数据链路层协议"><a class="markdownIt-Anchor" href="#数据链路层协议"></a> 数据链路层协议</h1>
+<h2 id="停-等协议"><a class="markdownIt-Anchor" href="#停-等协议"></a> 停-等协议</h2>
+<h3 id="协议1一个无限制的单工信道"><a class="markdownIt-Anchor" href="#协议1一个无限制的单工信道"></a> 协议1：一个无限制的单工信道</h3>
+<p>在这样 <strong>理想化</strong> 的条件下,数据的传输就非常简单（不需要有流量控制，也不需要有差错控制）。</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>发送方</th>
+<th>接收方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>从网络层接受一个分组</td>
+<td>等待帧到达事件</td>
+</tr>
+<tr>
+<td>2</td>
+<td>将分组装入帧的信息域</td>
+<td>从物理层接受一个帧</td>
+</tr>
+<tr>
+<td>3</td>
+<td>将帧传给物理层</td>
+<td>从帧中取分组传给网络层</td>
+</tr>
+<tr>
+<td>4</td>
+<td>返回 1</td>
+<td>返回 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="协议2单工停-等协议"><a class="markdownIt-Anchor" href="#协议2单工停-等协议"></a> 协议2：单工停-等协议</h3>
+<p>假定信道不会出错，但需要进行 <strong>流量控制</strong>。在这时引入反馈机制，要求接收端对于收到的每个帧都要给出响应</p>
+<p>同时发送端在发出一帧后必须收到该帧的响应后才能发送下一个帧（停-等）。</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>发送方</th>
+<th>接收方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>从网络层接受一个分组</td>
+<td>等待帧到达事件</td>
+</tr>
+<tr>
+<td>2</td>
+<td>将分组装入帧的信息域</td>
+<td>从物理层接受一个帧</td>
+</tr>
+<tr>
+<td>3</td>
+<td>将帧传给物理层</td>
+<td>从帧中取分组传给网络层</td>
+</tr>
+<tr>
+<td>4</td>
+<td>等待响应帧，收到后返回 1</td>
+<td>回送响应帧并返回 1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>由于一次只发送一帧，且该帧一定能正确到达，不会有重发的需要，因此也不需要帧序号。</strong></li>
+</ul>
+<h3 id="协议3有噪信道上的单工协议"><a class="markdownIt-Anchor" href="#协议3有噪信道上的单工协议"></a> 协议3：有噪信道上的单工协议</h3>
+<p>假设信道会出错，而且接收端处理能力也有限，即 <strong>同时需要差错控制和流量控制</strong></p>
+<ul>
+<li>协议要点：
+<ul>
+<li>采用协议 2 的停-等方式</li>
+<li>发送方每次只发送一个帧，当这个帧被正确接收后才能发送下一帧，若该帧未在规定的时间内得到确认（<strong>超时</strong>），则重发该帧；</li>
+<li>接收端对每个收到的帧进行校验，对正确收到的帧发回确认，错误的帧丢弃；</li>
+</ul>
+</li>
+<li>由于需要区分新、旧两个帧，因此要 <strong>使用 1 比特的帧序号</strong></li>
+<li>发送完一个帧后，必须保留它的副本，以便重发</li>
+</ul>
+<h4 id="发送方"><a class="markdownIt-Anchor" href="#发送方"></a> 发送方</h4>
+<ol>
+<li>初始化（next_frame_to_send = 0）；</li>
+<li>从网络层接收一个分组，放入缓冲区；</li>
+<li>使用缓冲区中的分组和 next_frame_to_send 构造一个帧；</li>
+<li>将帧传给物理层发送，并启动相关的计时器；</li>
+<li>等待事件发生（帧到达，收到坏帧，超时）；</li>
+<li>事件发生：
+<ul>
+<li>帧到达：从物理层接收一个帧，检查帧的 ack 域
+<ul>
+<li>若是对所发帧的确认（ack = next_frame_to_send），终止相关的计时器，从网络层接收下一个分组放入缓冲区，发送序号加1，返回3；</li>
+<li>若不是对所发帧的确认，返回3；（缓冲区内容和发送序号均不变）</li>
+</ul>
+</li>
+<li>其它事件（收到坏帧，超时）：返回3；（缓冲区内容和发送序号不变）</li>
+</ul>
+</li>
+</ol>
+<h4 id="接收方"><a class="markdownIt-Anchor" href="#接收方"></a> 接收方</h4>
+<ol>
+<li>初始化期待接收的帧序号（frame_expected = 0）；</li>
+<li>等待帧的到达；</li>
+<li>从物理层接收一个帧，检查帧的seq域：
+<ul>
+<li>若是期待接收的帧（seq = frame_expected），将帧中携带的分组交给网络层，frame_expected加1，执行 4 ；</li>
+<li>若不是期待接收的帧（一个重复帧），执行 2；</li>
+</ul>
+</li>
+<li>发回确认帧（确认帧的 ack = 收到帧的 seq）；</li>
+<li>返回 2。</li>
+</ol>
+<h2 id="滑动窗口协议"><a class="markdownIt-Anchor" href="#滑动窗口协议"></a> 滑动窗口协议</h2>
+<ul>
+<li>
+<p><strong>捎带确认(piggybacking)</strong>：将确认暂时延迟以便可以钩到下一个外发数据帧</p>
+</li>
+<li>
+<p><strong>推迟确认</strong>：当需要发送确认但没有要发送的数据进行捎带时，可以让确认信息推迟一小段时间再发送</p>
+</li>
+<li>
+<p><strong>自动重复请求 (ARQ)</strong>：是应用最广泛的一种差错控制技术，包括：无错接收的 PDU（协议数据单元）的肯定确认、对未确认 PDU（协议数据单元）的自动重传和丢弃。</p>
+<ul>
+<li>接收方监测到数据中存在差错：发否认帧，立即启动重发；不理会，发送方超时重发</li>
+</ul>
+</li>
+</ul>
+<h3 id="协议4停止-等待式-arq"><a class="markdownIt-Anchor" href="#协议4停止-等待式-arq"></a> 协议4：停止-等待式 ARQ</h3>
+<h4 id="基本概念-2"><a class="markdownIt-Anchor" href="#基本概念-2"></a> 基本概念</h4>
+<ul>
+<li>每个待发送帧被赋予一个 <strong>序列号 seq</strong>
+<ul>
+<li>seq 的取值范围是 <strong>0 ~ 2<sup>n</sup> - 1</strong>（n位字段）</li>
+</ul>
+</li>
+<li><strong>建立缓冲区</strong>
+<ul>
+<li><strong>发送窗口</strong>：缓存已发送、待确认的帧
+<ul>
+<li>顺序接收来自网络层的分组,成帧,赋予序列号</li>
+<li>最多保存W个已经发送、等待确认的帧</li>
+<li>窗口达到最大值w时强制关闭网络层</li>
+</ul>
+</li>
+<li><strong>接收窗口</strong>：缓存待接收的帧(序号)
+<ul>
+<li>对进入窗口的顿顺序提交网络层,产生确认</li>
+<li>落在窗口外的帧被丢弃</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="基本工作原理"><a class="markdownIt-Anchor" href="#基本工作原理"></a> 基本工作原理</h4>
+<ul>
+<li><strong>窗口设置</strong>
+<ul>
+<li>滑动窗口最大值：<strong>MAX = SEQ + 1</strong></li>
+<li>通信双方初始值：<strong>seq = 0, ack = 1</strong>（期待接收seq = 0）</li>
+</ul>
+</li>
+<li><strong>窗口滑动机制</strong>
+<ul>
+<li>A 首先发送数据帧(seq=0, ack=1, A0)</li>
+<li>B 收到 A0,发送捎带确认帧(seq=0, ack=0, BO)</li>
+<li>A 收到对 AO 的确认,滑动窗口,发送帧 (seq=1, ack=0, A1)</li>
+</ul>
+</li>
+<li><strong>特点</strong>
+<ul>
+<li>序列号 seq 和确认值 ack：<strong>“0”、“1” 交替</strong></li>
+<li><strong>滑动窗口长度 W = 1</strong>，发送、接收都是 1，收到确认才移动窗口</li>
+<li>保证按顺序将接收到的正确帧只一次上交网络层</li>
+</ul>
+</li>
+</ul>
+<h4 id="要点"><a class="markdownIt-Anchor" href="#要点"></a> 要点</h4>
+<ul>
+<li>连续出现相同发送序号的数据帧，表明发送端进行了 <strong>超时重传</strong></li>
+<li>连续出现相同序号的确认帧，表明接收端收到了 <strong>重复帧</strong></li>
+<li>发送端在发送完数据帧时，必须在其发送缓存中暂时保留这个数据帧的 <strong>副本</strong>，以便重发
+<ul>
+<li>只有确认对方已经收到这个数据帧时，才可以清除这个副本</li>
+</ul>
+</li>
+</ul>
+<h4 id="优缺点"><a class="markdownIt-Anchor" href="#优缺点"></a> 优缺点</h4>
+<ul>
+<li>优点：<strong>比较简单</strong></li>
+<li>缺点：<strong>通信信道的利用率不高</strong>，也就是说，信道还远远没有被数据比特填满</li>
+</ul>
+<h3 id="协议5回退-n-帧协议"><a class="markdownIt-Anchor" href="#协议5回退-n-帧协议"></a> 协议5：回退 N 帧协议</h3>
+<ul>
+<li>接收方的接收策略选择：
+<ul>
+<li><strong>丢弃错帧</strong>，其 <strong>后续帧</strong> 因不是期望接收帧 <strong>也被丢弃</strong>（接收窗口为 1）</li>
+</ul>
+</li>
+<li>发送方的重传策略选择：
+<ul>
+<li>缓存在发送窗口中的 <strong>出错帧以及其后续帧全部重发</strong></li>
+</ul>
+</li>
+<li><strong>提高了信道利用率，但是传送效率降低</strong></li>
+</ul>
+<h4 id="基本概念-3"><a class="markdownIt-Anchor" href="#基本概念-3"></a> 基本概念</h4>
+<ul>
+<li>定义序列号 seq 的取值范围和滑动窗口长度 w</li>
+<li>发送方连续发送至发送窗口满口</li>
+<li>接收窗口为 1,对出错帧不确认（引发超时）</li>
+<li>发送方超时重传,从未被确认帧开始</li>
+</ul>
+<h4 id="工作原理-2"><a class="markdownIt-Anchor" href="#工作原理-2"></a> 工作原理</h4>
+<p><img alt data-src="https://cdn.jsdelivr.net/gh/easonzzzz/BlogPic/img/20200325160747.png" class="lazyload"></p>
+<ul>
+<li><strong>累计确认</strong>：
+<ul>
+<li>n 号帧的确认到达时，蕴含着：n-1、n-2…n 号帧之前的帧也被确认</li>
+<li>当采用了累计确认,收到了 n 帧的确认, n 帧之前的帧都可从缓存中删掉。</li>
+</ul>
+</li>
+<li>接收方要做的事：
+<ul>
+<li>如果正确收到 n 号帧，并且按序，那么回复 ack，并将该帧中的数据部分交付给上层</li>
+<li>其余情况都丢弃帧，并为 <strong>最近按序接受的帧</strong> 重发 ack。接收方 <strong>无需缓存任何失序帧</strong>，<strong>只需维护一个信息：expected seq num</strong>（下一个按序接收的帧序号）</li>
+</ul>
+</li>
+</ul>
+<h4 id="注意点"><a class="markdownIt-Anchor" href="#注意点"></a> 注意点</h4>
+<ul>
+<li>接收端 <strong>只按序接收</strong> 数据帧。</li>
+<li><strong>超时事件</strong>
+<ul>
+<li>协议名字为后退 N 帧(Go Back N)，源于出现丢失和超时的时候，发送方的行为。当出现差错必须重传时，要向 <strong>回走 N 个帧</strong>，然后再开始重传。</li>
+<li>在每发送完一个数据帧时都要设置该帧的 <strong>超时计时器</strong>
+<ul>
+<li>如果在所设置的超时时间内收到确认帧，就立即将超时计时器清零。</li>
+<li>但若在所设置的超时时间到了而未收到确认帧，就要重传相应的数据帧（仍需重新设置超时计时器）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>滑动窗口大小：
+<ul>
+<li>发送窗口：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>≤</mo><msub><mi>W</mi><mi>T</mi></msub><mo>≤</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \leq W_{T} \leq 2^n - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>接收窗口：1</li>
+</ul>
+</li>
+</ul>
+<h3 id="协议6选择重传协议"><a class="markdownIt-Anchor" href="#协议6选择重传协议"></a> 协议6：选择重传协议</h3>
+<ul>
+<li>可 <strong>加大接收窗口</strong>，先收下发送序号不连续但仍处在接收窗口中的那些数据帧。等到所缺序号的数据帧收到后再一并送交主机</li>
+<li>选择重传 ARQ 协议可 <strong>避免重复传送</strong> 那些本来已经正确到达接收端的数据帧。</li>
+<li>在接收端要设置具有相当容量的缓存空间</li>
+<li>接收窗口 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>R</mi></msub><mo>≤</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">W_{R} \leq 2^{n-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="工作原理-3"><a class="markdownIt-Anchor" href="#工作原理-3"></a> 工作原理</h4>
+<p><img alt data-src="https://cdn.jsdelivr.net/gh/easonzzzz/BlogPic/img/20200325171431.png" class="lazyload"></p>
+<ul>
+<li><strong>来者不拒（窗口内的帧）</strong>
+<ul>
+<li>SR 接收方将 <strong>确认一个正确接收的帧</strong>，而<strong>不管是否按序</strong>。</li>
+<li>失序的帧会被缓存，并 <strong>返回接收方一个该帧的确认帧</strong></li>
+<li>直到所有帧（即序号更小的帧）皆被收到为止，这时候才滑动窗口，然后将数据交付上层</li>
+<li>如果收到了窗口之前的帧，回复该帧的确认；如果在窗口之后，则丢弃</li>
+</ul>
+</li>
+</ul>
+<h4 id="重点"><a class="markdownIt-Anchor" href="#重点"></a> 重点</h4>
+<ol>
+<li>对数据帧逐一确认，收一个确认一个</li>
+<li>只重传出错帧</li>
+<li>接收方有缓存</li>
+</ol>
+<h4 id="窗口大小"><a class="markdownIt-Anchor" href="#窗口大小"></a> 窗口大小</h4>
+<ul>
+<li>发送窗口最好等于接收窗口</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mrow><mi>T</mi><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>W</mi><mrow><mi>R</mi><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>=</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">W_{Tmax} = W_{Rmax} = 2^{n-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>
+<ul>
+<li>保证新老窗口不重叠</li>
+</ul>
+</li>
+</ul>
+<h4 id="回退-n-帧-vs-选择重传"><a class="markdownIt-Anchor" href="#回退-n-帧-vs-选择重传"></a> 回退 N 帧 VS 选择重传</h4>
+<ul>
+<li><strong>回退 N 帧</strong>
+<ul>
+<li>发送方需要较大的缓冲区,以便重传</li>
+<li>重传帧数多,适于信道出错率较少的情况</li>
+<li>滑动窗口大小：
+<ul>
+<li>发送窗口：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>&lt;</mo><msub><mi>W</mi><mi>T</mi></msub><mo>≤</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 &lt; W_{T} \leq 2^n - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>接收窗口：1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>选择重传</strong>
+<ul>
+<li>接收方需要较大的缓冲区,以便按正确顺序将分组提交网络层</li>
+<li>重传帧数少,适于信道质量不好的情况</li>
+<li>滑动窗口大小：
+<ul>
+<li>发送窗口：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>&lt;</mo><msub><mi>W</mi><mi>T</mi></msub><mo>≤</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1 &lt; W_{T} \leq 2^{n - 1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li>接收窗口：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>&lt;</mo><msub><mi>W</mi><mi>R</mi></msub><mo>≤</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1 &lt; W_{R} \leq 2^{n - 1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="信道利用率"><a class="markdownIt-Anchor" href="#信道利用率"></a> 信道利用率</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">信</mi><mi mathvariant="normal">道</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mrow><mi>W</mi><mo>∗</mo><msub><mi>T</mi><mi>f</mi></msub></mrow><mrow><msub><mi>T</mi><mi>f</mi></msub><mo>+</mo><mi>R</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>W</mi><mo>∗</mo><mi>k</mi></mrow><mrow><mi>k</mi><mo>+</mo><mi>b</mi><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">信道利用率 = \frac{W * T_f}{T_f + R} = \frac{W * k}{k + bR}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">信</span><span class="mord cjk_fallback">道</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.5394909999999997em;vertical-align:-0.5480799999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9914109999999998em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.13889em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29011428571428566em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.51308em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span><span class="mbin mtight">∗</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.13889em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29011428571428566em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5480799999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.283439em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight">b</span><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span><span class="mbin mtight">∗</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<ul>
+<li>W 滑动窗口大小，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mi>f</mi></msub></mrow><annotation encoding="application/x-tex">T_f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 发送时延，R 传输时延（双程）、k 数据帧长度、b 信道容量（传输速度）</li>
+</ul>
+<h3 id="链路利用率"><a class="markdownIt-Anchor" href="#链路利用率"></a> 链路利用率</h3>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">链</mi><mi mathvariant="normal">路</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mi>w</mi><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mi>B</mi><mi>D</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">链路利用率 = \frac{w}{1+2BD}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">链</span><span class="mord cjk_fallback">路</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.8768900000000002em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li>假定确认了帧的大小，用带宽延迟积除以帧的大小得到信道上同时存在的帧的数量，称为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">BD</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span></span></li>
+<li>链路利用率的理论上限为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>B</mi><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">w/(1+2BD)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord">/</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span>，其中 w 最大等于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mi>B</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">1+2BD</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span></span></span></li>
+<li>这是一个上限值，它不允许有任何帧的处理时间，并且视确认帧的长度为零</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/07/01/学习/计网/数据链路层（上）/">http://yoursite.com/2020/07/01/学习/计网/数据链路层（上）/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/计网/">计网    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/07/01/学习/计网/应用层/"><img class="prev_cover lazyload" data-src="https://api.dujin.org/bing/1920.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>应用层</span></div></a></div><div class="next-post pull_right"><a href="/2020/07/01/学习/计网/数据链路层（下）/"><img class="next_cover lazyload" data-src="https://api.dujin.org/bing/1366.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>数据链路层（下）</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

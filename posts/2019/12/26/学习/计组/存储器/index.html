@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>存储器 | Nice To Meet U</title><meta name="description" content="存储器"><meta name="keywords" content="计组"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="存储器"><meta name="twitter:description" content="存储器"><meta name="twitter:image" content="https://source.unsplash.com/collection/collectionid/1600x900"><meta property="og:type" content="article"><meta property="og:title" content="存储器"><meta property="og:url" content="http://yoursite.com/2019/12/26/学习/计组/存储器/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="存储器"><meta property="og:image" content="https://source.unsplash.com/collection/collectionid/1600x900"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2019/12/26/学习/计组/存储器/"><link rel="prev" title="Java网络编程" href="http://yoursite.com/2019/12/27/学习/Java学习/Java网络编程/"><link rel="next" title="运算方法" href="http://yoursite.com/2019/12/24/学习/计组/运算方法/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#概述"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 概述</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#分类"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text"> 分类</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#层次结构"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text"> 层次结构</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#主存储器"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 主存储器</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#半导体存储芯片"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text"> 半导体存储芯片</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#ram"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text"> RAM</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#rom"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text"> ROM</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#存储器与cpu的连接"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 存储器与CPU的连接</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#存储器的校验"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> 存储器的校验</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#提高访问速度的措施"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text"> 提高访问速度的措施</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#高速缓冲存储器"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text"> 高速缓冲存储器</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#概述-2"><span class="toc_mobile_items-number">6.1.</span> <span class="toc_mobile_items-text"> 概述</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#cache工作原理"><span class="toc_mobile_items-number">6.1.1.</span> <span class="toc_mobile_items-text"> Cache工作原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#cache的结构"><span class="toc_mobile_items-number">6.1.2.</span> <span class="toc_mobile_items-text"> Cache的结构</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#cache的读写操作"><span class="toc_mobile_items-number">6.1.3.</span> <span class="toc_mobile_items-text"> Cache的读写操作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#cache的改进"><span class="toc_mobile_items-number">6.1.4.</span> <span class="toc_mobile_items-text"> Cache的改进</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#cache-主存的地址映射"><span class="toc_mobile_items-number">6.2.</span> <span class="toc_mobile_items-text"> Cache-主存的地址映射</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#直接映射"><span class="toc_mobile_items-number">6.2.1.</span> <span class="toc_mobile_items-text"> 直接映射</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#全相联映射"><span class="toc_mobile_items-number">6.2.2.</span> <span class="toc_mobile_items-text"> 全相联映射</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#组相联映射"><span class="toc_mobile_items-number">6.2.3.</span> <span class="toc_mobile_items-text"> 组相联映射</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#替换算法"><span class="toc_mobile_items-number">6.3.</span> <span class="toc_mobile_items-text"> 替换算法</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#辅助存储器"><span class="toc_mobile_items-number">7.</span> <span class="toc_mobile_items-text"> 辅助存储器</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#概述-3"><span class="toc_mobile_items-number">7.1.</span> <span class="toc_mobile_items-text"> 概述</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#磁记录原理和记录方式"><span class="toc_mobile_items-number">7.2.</span> <span class="toc_mobile_items-text"> 磁记录原理和记录方式</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#磁记录原理"><span class="toc_mobile_items-number">7.2.1.</span> <span class="toc_mobile_items-text"> 磁记录原理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#记录方式"><span class="toc_mobile_items-number">7.2.2.</span> <span class="toc_mobile_items-text"> 记录方式</span></a></li></ol></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text"> 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分类"><span class="toc-number">1.1.</span> <span class="toc-text"> 分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层次结构"><span class="toc-number">1.2.</span> <span class="toc-text"> 层次结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主存储器"><span class="toc-number">2.</span> <span class="toc-text"> 主存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#半导体存储芯片"><span class="toc-number">2.1.</span> <span class="toc-text"> 半导体存储芯片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ram"><span class="toc-number">2.2.</span> <span class="toc-text"> RAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rom"><span class="toc-number">2.3.</span> <span class="toc-text"> ROM</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#存储器与cpu的连接"><span class="toc-number">3.</span> <span class="toc-text"> 存储器与CPU的连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#存储器的校验"><span class="toc-number">4.</span> <span class="toc-text"> 存储器的校验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#提高访问速度的措施"><span class="toc-number">5.</span> <span class="toc-text"> 提高访问速度的措施</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#高速缓冲存储器"><span class="toc-number">6.</span> <span class="toc-text"> 高速缓冲存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述-2"><span class="toc-number">6.1.</span> <span class="toc-text"> 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cache工作原理"><span class="toc-number">6.1.1.</span> <span class="toc-text"> Cache工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache的结构"><span class="toc-number">6.1.2.</span> <span class="toc-text"> Cache的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache的读写操作"><span class="toc-number">6.1.3.</span> <span class="toc-text"> Cache的读写操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache的改进"><span class="toc-number">6.1.4.</span> <span class="toc-text"> Cache的改进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cache-主存的地址映射"><span class="toc-number">6.2.</span> <span class="toc-text"> Cache-主存的地址映射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接映射"><span class="toc-number">6.2.1.</span> <span class="toc-text"> 直接映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全相联映射"><span class="toc-number">6.2.2.</span> <span class="toc-text"> 全相联映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组相联映射"><span class="toc-number">6.2.3.</span> <span class="toc-text"> 组相联映射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#替换算法"><span class="toc-number">6.3.</span> <span class="toc-text"> 替换算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#辅助存储器"><span class="toc-number">7.</span> <span class="toc-text"> 辅助存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述-3"><span class="toc-number">7.1.</span> <span class="toc-text"> 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁记录原理和记录方式"><span class="toc-number">7.2.</span> <span class="toc-text"> 磁记录原理和记录方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#磁记录原理"><span class="toc-number">7.2.1.</span> <span class="toc-text"> 磁记录原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#记录方式"><span class="toc-number">7.2.2.</span> <span class="toc-text"> 记录方式</span></a></li></ol></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://source.unsplash.com/collection/collectionid/1600x900)"><div id="post-info"><div id="post-title"><div class="posttitle">存储器</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-12-26<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-01-02</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/计算机组成原理/">计算机组成原理</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h1>
+<h2 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h2>
+<ol>
+<li>按存储介质分类
+<ol>
+<li>半导体存储器：TTL，MOS(易失)</li>
+<li>磁表面存储器</li>
+<li>磁芯存储器</li>
+<li>光盘存储器</li>
+</ol>
+</li>
+<li>按照存取方式
+<ol>
+<li>RAM(Random Access Memory)</li>
+<li>ROM(Read Only Memory)</li>
+<li>串行访问存储器</li>
+</ol>
+</li>
+<li>按在计算机中的作用分类<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191216180240.png" class="lazyload"></li>
+</ol>
+<h2 id="层次结构"><a class="markdownIt-Anchor" href="#层次结构"></a> 层次结构</h2>
+<ol>
+<li>存储器三个主要特性的关系<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191216181028.png" class="lazyload"></li>
+<li>缓存-主存层次和主存-辅存层次<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191216181224.png" class="lazyload"></li>
+</ol>
+<h1 id="主存储器"><a class="markdownIt-Anchor" href="#主存储器"></a> 主存储器</h1>
+<p><img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191216181356.png" class="lazyload"></p>
+<ul>
+<li>编址单位：字节</li>
+<li>技术指标：
+<ol>
+<li>容量：主存<strong>存放二进制代码的总位数</strong></li>
+<li>速度：
+<ul>
+<li>存取时间：存储器的<strong>访问时间</strong></li>
+<li>存取周期：连续两次独立的存储器操作所需的<strong>最小间隔时间</strong>，比存取时间长，差个复原时间</li>
+</ul>
+</li>
+<li>带宽：<strong>位/秒(bit/s)</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="半导体存储芯片"><a class="markdownIt-Anchor" href="#半导体存储芯片"></a> 半导体存储芯片</h2>
+<ul>
+<li>容量：<strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi mathvariant="normal">地</mi><mi mathvariant="normal">址</mi><mi mathvariant="normal">线</mi></mrow></msup><mo>×</mo><mi mathvariant="normal">数</mi><mi mathvariant="normal">据</mi><mi mathvariant="normal">线</mi></mrow><annotation encoding="application/x-tex">2^{地址线} \times 数据线</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.363em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">地</span><span class="mord cjk_fallback mtight">址</span><span class="mord cjk_fallback mtight">线</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">据</span><span class="mord cjk_fallback">线</span></span></span></span></strong></li>
+<li>译码驱动方式:
+<ul>
+<li>线选法</li>
+<li>重合法</li>
+</ul>
+</li>
+</ul>
+<h2 id="ram"><a class="markdownIt-Anchor" href="#ram"></a> RAM</h2>
+<ol>
+<li>静态RAM(SRAM)</li>
+<li>动态RAM(DRAM)
+<ul>
+<li><strong>2ms(刷新周期)</strong> 内再生(刷新)，<strong>一行行进行</strong></li>
+<li>刷新方式：
+<ol>
+<li>集中刷新(有死区)</li>
+<li>分散刷新(无死区)</li>
+<li>异步刷新(两者结合)：刷新安排在指令译码阶段，不会出现死区</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="rom"><a class="markdownIt-Anchor" href="#rom"></a> ROM</h2>
+<ol>
+<li>掩膜ROM：不能修改</li>
+<li>PROM(一次性编程)</li>
+<li>EPROM(多次性编程)</li>
+<li>EEPROM(电可擦除)</li>
+<li>Flash Memory(闪速型存储器)</li>
+</ol>
+<h1 id="存储器与cpu的连接"><a class="markdownIt-Anchor" href="#存储器与cpu的连接"></a> 存储器与CPU的连接</h1>
+<ol>
+<li>存储器容量的扩展
+<ol>
+<li>位扩展(增加存储字长)</li>
+<li>字扩展(增加存储字的数量)</li>
+<li>字、位扩展</li>
+</ol>
+</li>
+<li>存储器与CPU的连接
+<ol>
+<li>地址线的连接
+<ul>
+<li>低位接存储芯片，高位作片选信号</li>
+</ul>
+</li>
+<li>数据线的连接</li>
+<li>读/写命令线的连接</li>
+<li>片选线的连接</li>
+<li>合理选择存储芯片</li>
+<li>其他：时序，负载</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>做题步骤：
+<ol>
+<li>写出对应二进制地址码</li>
+<li>确定芯片的数量及类型
+<ul>
+<li>优先位扩展：字扩展要设计片选型号，而位扩展只需将数据线引出即可</li>
+<li>RAM，ROM尽量选择外特性一致，简化连接，避免二级译码</li>
+</ul>
+</li>
+<li>分配地址线</li>
+<li>确定片选信号</li>
+</ol>
+</li>
+</ul>
+<h1 id="存储器的校验"><a class="markdownIt-Anchor" href="#存储器的校验"></a> 存储器的校验</h1>
+<ol>
+<li>编码的最小距离：任意两组合法代码之间的二进制位数的<strong>最少差异数</strong>
+<ul>
+<li>L - 1 = D + C</li>
+<li>L：最小距离；D：检错位数；C：纠错位数</li>
+<li><strong>汉明码是具有一位纠错能力的编码</strong></li>
+</ul>
+</li>
+<li>汉明码的组成三要素
+<ol>
+<li>添加k位校验位：<strong>2^k ≥ n+k+1</strong> [传输n位，分成k组]</li>
+<li>检测位的位置：<strong>2^i</strong> (i=0,1,……) [这一位不与其他组共用]
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>1</mn></msub><mi mathvariant="normal">：</mi><mn>1</mn><mi mathvariant="normal">，</mi><mn>3</mn><mi mathvariant="normal">，</mi><mn>5</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>9</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{1}检测的g_{1}：1，3，5，7，9……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">1</span><span class="mord cjk_fallback">，</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">5</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">9</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>2</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>2</mn></msub><mi mathvariant="normal">：</mi><mn>2</mn><mi mathvariant="normal">，</mi><mn>3</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>10</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{2}检测的g_{2}：2，3，6，7，10……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">2</span><span class="mord cjk_fallback">，</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>4</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>3</mn></msub><mi mathvariant="normal">：</mi><mn>4</mn><mi mathvariant="normal">，</mi><mn>5</mn><mi mathvariant="normal">，</mi><mn>6</mn><mi mathvariant="normal">，</mi><mn>7</mn><mi mathvariant="normal">，</mi><mn>12</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{4}检测的g_{3}：4，5，6，7，12……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">4</span><span class="mord cjk_fallback">，</span><span class="mord">5</span><span class="mord cjk_fallback">，</span><span class="mord">6</span><span class="mord cjk_fallback">，</span><span class="mord">7</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mn>8</mn></msub><mi mathvariant="normal">检</mi><mi mathvariant="normal">测</mi><mi mathvariant="normal">的</mi><msub><mi>g</mi><mn>4</mn></msub><mi mathvariant="normal">：</mi><mn>8</mn><mi mathvariant="normal">，</mi><mn>9</mn><mi mathvariant="normal">，</mi><mn>10</mn><mi mathvariant="normal">，</mi><mn>11</mn><mi mathvariant="normal">，</mi><mn>12</mn><mo>…</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">C_{8}检测的g_{4}：8，9，10，11，12……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">8</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">检</span><span class="mord cjk_fallback">测</span><span class="mord cjk_fallback">的</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">：</span><span class="mord">8</span><span class="mord cjk_fallback">，</span><span class="mord">9</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">0</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">1</span><span class="mord cjk_fallback">，</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></li>
+</ul>
+</li>
+<li>检测位的取值：所在小组中承担的<strong>奇偶校验任务</strong>有关</li>
+</ol>
+</li>
+<li>汉明码纠错过程<br>
+形成新的检测位P[i]，和该组中1个数有关(奇偶校验决定，一般为偶校验)</li>
+</ol>
+<h1 id="提高访问速度的措施"><a class="markdownIt-Anchor" href="#提高访问速度的措施"></a> 提高访问速度的措施</h1>
+<ul>
+<li>采用高速器件</li>
+<li>采用层次结构 Cache-主存</li>
+<li>调整主存结构
+<ol>
+<li>单体多字：增加存储器的带宽</li>
+<li>多体并行
+<ol>
+<li>高位交叉：<strong>顺序编址</strong>，各个体<strong>并行工作</strong>(适合存储器扩展，但不适合增加带宽)</li>
+<li>低位交叉：各个体<strong>轮流编制</strong>，<strong>在不改变存取周期的前提下，增加存储器的带宽</strong>(流水线方式)</li>
+</ol>
+</li>
+<li>高性能存储芯片
+<ol>
+<li>SDRAM(同步RAM)</li>
+<li>RDRAM</li>
+<li>带Cache的DRAM
+<ul>
+<li>集成了一个Cache，有利于猝发式读取</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="高速缓冲存储器"><a class="markdownIt-Anchor" href="#高速缓冲存储器"></a> 高速缓冲存储器</h1>
+<h2 id="概述-2"><a class="markdownIt-Anchor" href="#概述-2"></a> 概述</h2>
+<p>避免CPU&quot;空等&quot;，<strong>程序访问局部性原理</strong></p>
+<h3 id="cache工作原理"><a class="markdownIt-Anchor" href="#cache工作原理"></a> Cache工作原理</h3>
+<ol>
+<li>主存和缓存的编址<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191217163036.png" class="lazyload">
+<ul>
+<li>主存和缓存<strong>按块存储</strong>，<strong>块大小相等</strong>，B为块长</li>
+</ul>
+</li>
+<li>命中和未命中<br>
+缓存有C块，主存有M块，M &gt;&gt; C
+<ul>
+<li>命中：主存块调入缓存，建立了对应关系</li>
+<li>用<strong>标记</strong>记录与某缓存块建立了对应关系的<strong>主存块号</strong></li>
+</ul>
+</li>
+<li>Cache命中率：CPU欲访问的信息再Cache中的比率
+<ul>
+<li>与Cache的<strong>容量</strong>和<strong>块长</strong>有关</li>
+<li>块长取一个存取周期内从主存调出的信息长度</li>
+</ul>
+</li>
+<li>Cache-主存系统的效率
+<ul>
+<li>效率e与命中率有关<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191217164120.png" class="lazyload"><br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191217164226.png" class="lazyload"></li>
+</ul>
+</li>
+</ol>
+<h3 id="cache的结构"><a class="markdownIt-Anchor" href="#cache的结构"></a> Cache的结构</h3>
+<ol>
+<li>Cache存储体</li>
+<li>地址映射变换机构</li>
+<li>替换机构</li>
+</ol>
+<h3 id="cache的读写操作"><a class="markdownIt-Anchor" href="#cache的读写操作"></a> Cache的读写操作</h3>
+<ol>
+<li>读：<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191217165151.png" class="lazyload"></li>
+<li>写：<strong>Cache和主存的一致性</strong>
+<ol>
+<li>写直达法：既写入Cache又写入主存。<strong>写操作时间就是访问主存的时间</strong></li>
+<li>写回法：只把数据写入Cache而不写入主存，但Cache数据被替换出去时才写回主存。<strong>写操作时间就是访问Cache的时间</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="cache的改进"><a class="markdownIt-Anchor" href="#cache的改进"></a> Cache的改进</h3>
+<ol>
+<li>增加Cache的级数</li>
+<li>统一缓存和分立缓存</li>
+</ol>
+<h2 id="cache-主存的地址映射"><a class="markdownIt-Anchor" href="#cache-主存的地址映射"></a> Cache-主存的地址映射</h2>
+<h3 id="直接映射"><a class="markdownIt-Anchor" href="#直接映射"></a> 直接映射</h3>
+<ul>
+<li><strong>每个缓存块 i ———— 若干个主存块</strong></li>
+<li><strong>每个主存块 j ———— 一个缓存块</strong></li>
+</ul>
+<blockquote>
+<p>把主存划分成若干个<strong>与Cache相等的区</strong>，然后每个区里的字块一一映射到Cache字块<br>
+主存地址 = 主存字块标记(区号)[t] + Cache字块地址[c] + 字块内地址[b]<br>
+t + c = m</p>
+</blockquote>
+<h3 id="全相联映射"><a class="markdownIt-Anchor" href="#全相联映射"></a> 全相联映射</h3>
+<ul>
+<li><strong>主存中的任一块</strong>可以映射到<strong>缓存中的任一块</strong></li>
+</ul>
+<blockquote>
+<p>主存地址 = 主存字块标记(m=t+c) + 字块内地址(b)</p>
+</blockquote>
+<h3 id="组相联映射"><a class="markdownIt-Anchor" href="#组相联映射"></a> 组相联映射</h3>
+<ul>
+<li>直接映射和全相联映射的结合</li>
+<li>Cache被分成<strong>Q组</strong>，每组<strong>R块</strong></li>
+<li><strong>某一主存块j</strong> 按 <strong>modQ</strong> 映射到缓存的<strong>第i组</strong>中的<strong>任一块</strong></li>
+</ul>
+<blockquote>
+<p>直接映射：给定的一个块只能放在一个组<br>
+全相联映射：给定的一个块可以放到这个组中任一块<br>
+<img alt data-src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191217172401.png" class="lazyload"></p>
+</blockquote>
+<h2 id="替换算法"><a class="markdownIt-Anchor" href="#替换算法"></a> 替换算法</h2>
+<ol>
+<li>先进先出(FIFO)</li>
+<li>近期最少使用(LRU)：较好的利用局部性原理</li>
+</ol>
+<h1 id="辅助存储器"><a class="markdownIt-Anchor" href="#辅助存储器"></a> 辅助存储器</h1>
+<h2 id="概述-3"><a class="markdownIt-Anchor" href="#概述-3"></a> 概述</h2>
+<ul>
+<li>不与CPU直接交换信息</li>
+<li>磁表面技术指标：
+<ol>
+<li>记录密度：道密度Dt，位密度Db</li>
+<li>存储容量：C = n X k X s
+<ul>
+<li>C为存储总量，n为盘面数，k为磁道数，s为磁道的二进制代码数</li>
+</ul>
+</li>
+<li>平均寻址时间：寻道时间+等待时间
+<ul>
+<li>平均等待时间：盘片旋转一周所需的时间的一半(即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mrow><mi mathvariant="normal">转</mi><mi mathvariant="normal">速</mi><mo>×</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{转速 \times2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2484389999999999em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">转</span><span class="mord cjk_fallback mtight">速</span><span class="mbin mtight">×</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>)</li>
+</ul>
+</li>
+<li>数据传输率：Dr = Db X V</li>
+<li>误码率</li>
+</ol>
+</li>
+</ul>
+<h2 id="磁记录原理和记录方式"><a class="markdownIt-Anchor" href="#磁记录原理和记录方式"></a> 磁记录原理和记录方式</h2>
+<h3 id="磁记录原理"><a class="markdownIt-Anchor" href="#磁记录原理"></a> 磁记录原理</h3>
+<ul>
+<li>磁层表面被磁化的<strong>极性方式不同</strong>，以区别0和1</li>
+</ul>
+<h3 id="记录方式"><a class="markdownIt-Anchor" href="#记录方式"></a> 记录方式</h3>
+<ol>
+<li><strong>归零制(RZ)</strong>：RZ记录&quot;1&quot;时，通以正向脉冲；记录&quot;0&quot;时，通以反向脉冲</li>
+<li><strong>不归零(NRZ)</strong>：NRZ记录时，始终有驱动电流，不是正向就是反向。变化才翻转(见变就翻)</li>
+<li><strong>&quot;见1就翻&quot;的不归零制(NEZ1)</strong>：始终有电流，只有见&quot;1&quot;才翻转</li>
+<li><strong>调相制(PM)</strong>：又称相位编码(PE)，记录方式：记录&quot;1&quot;时，写电流由负变正；记录&quot;0&quot;时，写电流由正变负。电流变化出现在中间时刻。连续记录相同信息时，在每两个相同信息的交界处，电流反向；如果相邻信息不同，则电流不变向。</li>
+<li><strong>调频制(FM)</strong>：又称倍频制，以驱动电流变化的频率记录区别0，1。记录&quot;0&quot;时，电流不变；记录&quot;1&quot;时，电流中间时刻反向。交界处均反向一次。所以&quot;0&quot;变化一次，&quot;1&quot;变化两次</li>
+<li><strong>改进型调频制(MFM)</strong>：基本相同FM，但是MFM只有当连续记录两个或两个以上的&quot;0&quot;时，才在每位的起始位改变一次电流，不在每个起始点改变电流。</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/12/26/学习/计组/存储器/">http://yoursite.com/2019/12/26/学习/计组/存储器/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/计组/">计组    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/12/27/学习/Java学习/Java网络编程/"><img class="prev_cover lazyload" data-src="https://api.dujin.org/bing/1920.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>Java网络编程</span></div></a></div><div class="next-post pull_right"><a href="/2019/12/24/学习/计组/运算方法/"><img class="next_cover lazyload" data-src="https://api.dujin.org/bing/1920.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>运算方法</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Python模块 | Nice To Meet U</title><meta name="description" content="Python模块"><meta name="keywords" content="Python"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Python模块"><meta name="twitter:description" content="Python模块"><meta name="twitter:image" content="https://source.unsplash.com/collection/collectionid/1600x900"><meta property="og:type" content="article"><meta property="og:title" content="Python模块"><meta property="og:url" content="http://yoursite.com/2020/02/14/学习/Python学习/Python模块/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="Python模块"><meta property="og:image" content="https://source.unsplash.com/collection/collectionid/1600x900"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/02/14/学习/Python学习/Python模块/"><link rel="prev" title="论一只爬虫的自我修养" href="http://yoursite.com/2020/02/14/学习/Python学习/论一只爬虫的自我修养/"><link rel="next" title="Python魔法方法" href="http://yoursite.com/2020/02/12/学习/Python学习/Python魔法方法/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#模块就是程序"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 模块就是程序</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#命名空间"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 命名空间</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#导入模块"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 导入模块</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#__name____main__"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> __name__=’__main__’</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#搜索路径"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text"> 搜索路径</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#包"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text"> 包</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#像个极客一样去思考"><span class="toc_mobile_items-number">7.</span> <span class="toc_mobile_items-text"> 像个极客一样去思考</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#模块就是程序"><span class="toc-number">1.</span> <span class="toc-text"> 模块就是程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#命名空间"><span class="toc-number">2.</span> <span class="toc-text"> 命名空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#导入模块"><span class="toc-number">3.</span> <span class="toc-text"> 导入模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#__name____main__"><span class="toc-number">4.</span> <span class="toc-text"> __name__=’__main__’</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搜索路径"><span class="toc-number">5.</span> <span class="toc-text"> 搜索路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#包"><span class="toc-number">6.</span> <span class="toc-text"> 包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#像个极客一样去思考"><span class="toc-number">7.</span> <span class="toc-text"> 像个极客一样去思考</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://source.unsplash.com/collection/collectionid/1600x900)"><div id="post-info"><div id="post-title"><div class="posttitle">Python模块</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-14<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-02-14</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python学习/">Python学习</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="模块就是程序"><a class="markdownIt-Anchor" href="#模块就是程序"></a> 模块就是程序</h1>
+<p>模块是更高级的封装。说到封装，我们学了什么类型的封装：</p>
+<ul>
+<li>容器（列表、元组、字符串、字典等），是对数据的封装</li>
+<li>函数，是对语句的封装</li>
+<li>类，是对方法和属性的封装，也就是对函数和数据的封装</li>
+</ul>
+<p>现在我们要学的模块，就是程序的封装，保存的每一个 <strong>.py</strong> 结尾的文件，都是一个独立的模块。</p>
+<h1 id="命名空间"><a class="markdownIt-Anchor" href="#命名空间"></a> 命名空间</h1>
+<p><strong>命名空间(namespace)</strong> 表示 <strong>标识符(identifier)</strong> 的可见范围。一个标识符可在多个命名空间中定义，它 <strong>在不同命名空间中的含义是互不相干的。</strong><br>
+在 Python 中，每个模块都会维护一个独立的命名空间，如果你只是通过 <strong>import 模块名</strong> 来导入的话，要用 <strong>模块名.函数名</strong> 才能正常使用模块中的函数。</p>
+<h1 id="导入模块"><a class="markdownIt-Anchor" href="#导入模块"></a> 导入模块</h1>
+<p>导入模块有三种方法。</p>
+<ol>
+<li>
+<p><strong>import 模块名</strong></p>
+<ul>
+<li>直接使用 import，但是在调用模块中的函数时，要加上模块的命名空间</li>
+<li>这种方法如果模块名太长的话，不是很方便</li>
+</ul>
+</li>
+<li>
+<p><strong>from 模块名 import 函数名</strong></p>
+<ul>
+<li>这种导入方法会直接将模块的命名空间覆盖过来，调用时不用加上命名空间</li>
+<li>函数名用通配符 <strong>星号*</strong> 代替可以导入模块的所有命名空间，这样可能会陷入名字混乱的局面，不建议</li>
+</ul>
+</li>
+<li>
+<p><em><strong>import 模块名 as 新名字</strong></em></p>
+<ul>
+<li>这种方法可以给命名空间取个较简单的新名字，又不会污染命名空间，建议使用</li>
+</ul>
+</li>
+</ol>
+<h1 id="__name____main__"><a class="markdownIt-Anchor" href="#__name____main__"></a> __name__=’__main__’</h1>
+<p>模块是用来 <strong>组织 Python 的代码</strong>，还能 <strong>实现代码的重用</strong>。<br>
+但是模块可以导入模块，在运行模块的时候可能会执行导入模块的测试语句。<br>
+所以，要使用模块的 <strong>__name__属性</strong>。如果模块是主模块，<strong>__name__ = ‘__main__’</strong>。<br>
+因而模块中经常见到：<strong>if __name__==’__main__’</strong> 这句代码，这个 if 语句下再写测试语句，这样在别人调用自己的模块时，就不会执行测试语句了。</p>
+<h1 id="搜索路径"><a class="markdownIt-Anchor" href="#搜索路径"></a> 搜索路径</h1>
+<p>Python 模块的导入需要一个路径搜索的过程。在 Python <strong>预定义好的搜索路径</strong> 中寻找对应的模块文件：如果有，则导入；如果没有，则导入失败。<br>
+而这个搜索路径，就是一组目录，<strong>可以通过 sys 模块中的 path 变量显示出来</strong>（不同的机器上显示的路径信息可能不同）</p>
+<ul>
+<li>列出的这些路径都是 Python 在导入模块操作时回去搜索的。但是 site-package 目录是最佳选择，因为它生来就是做这些事情的。</li>
+<li>搜索路径也是可以扩展的，使用 sys.path.append() 就可以扩展搜索路径了。</li>
+</ul>
+<h1 id="包"><a class="markdownIt-Anchor" href="#包"></a> 包</h1>
+<p>实际上，一个大型的系统有成千上万的模块也是很正常的事。单单用模块来定义 Python 的功能显然还不够，如果都放在一起显然不好管理，而且还有命名冲突的可能。因此，Python 也出现了包的概念。<br>
+Python 中的包的实现要比 Java 中更为简洁。如何创建一个包：</p>
+<ol>
+<li><strong>创建一个文件夹用于存放相关模块，文件夹的名字就是包的名字</strong></li>
+<li><strong>在文件夹中创建一个 <em>__init__.py</em> 的模块文件，内容可以为空</strong>
+<ul>
+<li>这一步是必要的，内容可以为空，也可以写一些初始化代码。这一条是 Python 的规定，这样子可以告诉 Python 这个文件夹是包</li>
+</ul>
+</li>
+<li><strong>将相关模块放入文件夹中</strong></li>
+</ol>
+<h1 id="像个极客一样去思考"><a class="markdownIt-Anchor" href="#像个极客一样去思考"></a> 像个极客一样去思考</h1>
+<p>“Python 自己带着电池”，Python 附带安装了 Python 标准库。标准库中的模块极其有用，现在我们要学习：如何自主学习这些模块？<br>
+利用 Python 的官方文档，与 Java Document 一样。Python 的官方文档由几部分组成：</p>
+<ol>
+<li>
+<p><strong>What’s new in Python 3.7? or all “What’s new” documents since 2.0</strong></p>
+<ul>
+<li>Python3.7 的新内容，或者是列举 2.0 document 的新内容</li>
+</ul>
+</li>
+<li>
+<p><strong>Tutorial</strong></p>
+<ul>
+<li>Python 的基本语法</li>
+</ul>
+</li>
+<li>
+<p><em><strong>Library Reference</strong></em></p>
+<ul>
+<li>Python 官方枕边书，详细列举了 Python 所有内置函数和标准库的各个模块</li>
+</ul>
+</li>
+<li>
+<p><strong>Installing Python Modules</strong></p>
+<ul>
+<li>安装第三方模块</li>
+</ul>
+</li>
+<li>
+<p><strong>Disturbing Python Modules</strong></p>
+<ul>
+<li>发布第三方模块</li>
+</ul>
+</li>
+<li>
+<p><strong>Language Reference</strong></p>
+<ul>
+<li>讨论 Python 的语法与设计哲学</li>
+</ul>
+</li>
+<li>
+<p><strong>Python Setup and Usage</strong></p>
+<ul>
+<li>各个平台上 Python 的安装和使用</li>
+</ul>
+</li>
+<li>
+<p><strong>Python HOWTOs</strong></p>
+<ul>
+<li>深入探讨一些特定主题</li>
+</ul>
+</li>
+<li>
+<p><strong>Extending and Embedding</strong></p>
+<ul>
+<li>介绍如何用 C 和 C++ 开发 Python 的扩展模块</li>
+</ul>
+</li>
+<li>
+<p><strong>FAQs</strong></p>
+<ul>
+<li>常见问题的解决</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>另外值得一提的是 <strong>PEP(Python Enhancement Proposal)</strong>，Python 的增强建议书，用来规范与定义 Python 的各种增强与延伸功能的技术规格，让 Python 统一</p>
+<ul>
+<li>PEP1 是 PEP 本身的规范定义</li>
+<li>PEP3000 是 Python3 的相关技术规格</li>
+<li>PEP8 定义了 Python 代码的风格指南</li>
+</ul>
+</li>
+<li>
+<p><strong>对一个模块查看 __all__ 属性，可以直接获取可供调用接口的信息</strong></p>
+<ul>
+<li>不是所有的模块都有，建议编写这个属性</li>
+<li>from 模块名 import * ：只导入 __all__ 属性这个列表里的名字（如果没有，则导入所有不以下划线开头的名字）</li>
+</ul>
+</li>
+<li>
+<p><strong>模块的 __all__ 属性可以查看源代码位置</strong></p>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/14/学习/Python学习/Python模块/">http://yoursite.com/2020/02/14/学习/Python学习/Python模块/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/14/学习/Python学习/论一只爬虫的自我修养/"><img class="prev_cover lazyload" data-src="https://api.dujin.org/bing/1920.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>论一只爬虫的自我修养</span></div></a></div><div class="next-post pull_right"><a href="/2020/02/12/学习/Python学习/Python魔法方法/"><img class="next_cover lazyload" data-src="https://api.dujin.org/bing/1366.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Python魔法方法</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

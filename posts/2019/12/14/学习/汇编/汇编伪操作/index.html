@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>汇编伪操作 | Nice To Meet U</title><meta name="description" content="汇编伪操作"><meta name="keywords" content="汇编"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="汇编伪操作"><meta name="twitter:description" content="汇编伪操作"><meta name="twitter:image" content="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"><meta property="og:type" content="article"><meta property="og:title" content="汇编伪操作"><meta property="og:url" content="http://yoursite.com/2019/12/14/学习/汇编/汇编伪操作/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="汇编伪操作"><meta property="og:image" content="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2019/12/14/学习/汇编/汇编伪操作/"><link rel="prev" title="总线" href="http://yoursite.com/2019/12/16/学习/计组/总线/"><link rel="next" title="运算符重载" href="http://yoursite.com/2019/12/13/学习/C++学习/运算符重载/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#处理器选择伪操作"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 处理器选择伪操作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#段定义伪操作"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 段定义伪操作</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#完整的段定义伪操作"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text"> 完整的段定义伪操作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#假定伪指令assume"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text"> 假定伪指令ASSUME</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#段组定义伪操作"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text"> 段组定义伪操作</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#数据定义及存储器分配伪操作"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 数据定义及存储器分配伪操作</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#格式"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text"> 格式</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#重复说明符dup"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text"> 重复说明符DUP</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#强制属性操作符ptr"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text"> 强制属性操作符PTR</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#label伪操作"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text"> LABEL伪操作</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#表达式赋值伪操作"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> 表达式赋值伪操作</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#等价语句"><span class="toc_mobile_items-number">4.1.</span> <span class="toc_mobile_items-text"> 等价语句</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#等号"><span class="toc_mobile_items-number">4.2.</span> <span class="toc_mobile_items-text"> 等号&quot;=&quot;</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#equ和的区别"><span class="toc_mobile_items-number">4.3.</span> <span class="toc_mobile_items-text"> EQU和&quot;=&quot;的区别</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#地址计数器与对准伪操作"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text"> 地址计数器与对准伪操作</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#地址计数器"><span class="toc_mobile_items-number">5.1.</span> <span class="toc_mobile_items-text"> 地址计数器 $</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#org伪操作"><span class="toc_mobile_items-number">5.2.</span> <span class="toc_mobile_items-text"> ORG伪操作</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#基数控制伪操作"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text"> 基数控制伪操作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#其他"><span class="toc_mobile_items-number">7.</span> <span class="toc_mobile_items-text"> 其他</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#offset运算符"><span class="toc_mobile_items-number">7.1.</span> <span class="toc_mobile_items-text"> OFFSET运算符</span></a></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#处理器选择伪操作"><span class="toc-number">1.</span> <span class="toc-text"> 处理器选择伪操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#段定义伪操作"><span class="toc-number">2.</span> <span class="toc-text"> 段定义伪操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#完整的段定义伪操作"><span class="toc-number">2.1.</span> <span class="toc-text"> 完整的段定义伪操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#假定伪指令assume"><span class="toc-number">2.2.</span> <span class="toc-text"> 假定伪指令ASSUME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#段组定义伪操作"><span class="toc-number">2.3.</span> <span class="toc-text"> 段组定义伪操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据定义及存储器分配伪操作"><span class="toc-number">3.</span> <span class="toc-text"> 数据定义及存储器分配伪操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#格式"><span class="toc-number">3.1.</span> <span class="toc-text"> 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重复说明符dup"><span class="toc-number">3.2.</span> <span class="toc-text"> 重复说明符DUP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强制属性操作符ptr"><span class="toc-number">3.3.</span> <span class="toc-text"> 强制属性操作符PTR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#label伪操作"><span class="toc-number">3.4.</span> <span class="toc-text"> LABEL伪操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表达式赋值伪操作"><span class="toc-number">4.</span> <span class="toc-text"> 表达式赋值伪操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#等价语句"><span class="toc-number">4.1.</span> <span class="toc-text"> 等价语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#等号"><span class="toc-number">4.2.</span> <span class="toc-text"> 等号&quot;=&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#equ和的区别"><span class="toc-number">4.3.</span> <span class="toc-text"> EQU和&quot;=&quot;的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#地址计数器与对准伪操作"><span class="toc-number">5.</span> <span class="toc-text"> 地址计数器与对准伪操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#地址计数器"><span class="toc-number">5.1.</span> <span class="toc-text"> 地址计数器 $</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#org伪操作"><span class="toc-number">5.2.</span> <span class="toc-text"> ORG伪操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基数控制伪操作"><span class="toc-number">6.</span> <span class="toc-text"> 基数控制伪操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">7.</span> <span class="toc-text"> 其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#offset运算符"><span class="toc-number">7.1.</span> <span class="toc-text"> OFFSET运算符</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture)"><div id="post-info"><div id="post-title"><div class="posttitle">汇编伪操作</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-12-14<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-01-03</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/汇编语言/">汇编语言</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="处理器选择伪操作"><a class="markdownIt-Anchor" href="#处理器选择伪操作"></a> 处理器选择伪操作</h1>
+<p>这类伪操作一般放在程序的最前面，如不给出,则汇编程序默认值为  .8086</p>
+<h1 id="段定义伪操作"><a class="markdownIt-Anchor" href="#段定义伪操作"></a> 段定义伪操作</h1>
+<h2 id="完整的段定义伪操作"><a class="markdownIt-Anchor" href="#完整的段定义伪操作"></a> 完整的段定义伪操作</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">段名  SEGMENT  [定位类型]  [组合类型]  [使用类型]  [‘类别’]</span><br><span class="line">    ……</span><br><span class="line">    ……            ;语句序列</span><br><span class="line">段名  ENDS</span><br></pre></td></tr></table></figure>
+<ol>
+<li>段名是为该段起的名字，用来指出汇编程序为该段分配的存储区起始位置</li>
+<li>定位类型：<strong>PARA(默认)</strong>，WORD，BYTE，PAGE。
+<ul>
+<li>段地址起始地址的限制，PARA限制16的整数倍</li>
+</ul>
+</li>
+<li>组合类型：<strong>PRIVATE(默认)</strong>，PUBLIC，COMMON，STACK，MEMORY(同PUBLIC)，AT 表达式</li>
+<li>使用类型：USE16，USE32.
+<ul>
+<li>使用xx位寻址方式</li>
+</ul>
+</li>
+<li>类别：在引号中给出连接时组成的段组的类型名。在连接后形成的装入模块中，可使相同类别的段位置靠在一起。</li>
+</ol>
+<h2 id="假定伪指令assume"><a class="markdownIt-Anchor" href="#假定伪指令assume"></a> 假定伪指令ASSUME</h2>
+<ul>
+<li>格式：ASSUME  段寄存器：段名 [，段寄存器：段名]</li>
+<li>功能：<strong>建立段寄存器与段之间的对应关系</strong>。该伪指令一般出现在代码段中。
+<ul>
+<li>只是建立对应关系，但没有赋值，还<strong>需要自己初始化段寄存器的值</strong></li>
+</ul>
+</li>
+<li>其中段寄存器名必须是CS,DS,ES和SS中的一个。段名必须是由SEGMENT定义的段中的段名。</li>
+</ul>
+<h2 id="段组定义伪操作"><a class="markdownIt-Anchor" href="#段组定义伪操作"></a> 段组定义伪操作</h2>
+<ul>
+<li>格式：段组名  GROUP  数据段名1[，数据段名2……]</li>
+<li>功能：汇编程序把各数据段组成一个段组，以便程序在访问各数据段时使用一个数据段寄存器DS。</li>
+</ul>
+<h1 id="数据定义及存储器分配伪操作"><a class="markdownIt-Anchor" href="#数据定义及存储器分配伪操作"></a> 数据定义及存储器分配伪操作</h1>
+<h2 id="格式"><a class="markdownIt-Anchor" href="#格式"></a> 格式</h2>
+<p>[变量名]   助记符   操作数 [ , 操作数 , … ]  [ ; 注释]</p>
+<ul>
+<li>变量名必须是一个合法的标识符，可写可不写</li>
+<li>助记符：<strong>DB（字节）、DW（字）、DD（双字）、DF（6字节）、DQ（四字）、DT（10字节）</strong></li>
+<li>操作数是定义内存单元时的初值表达式，一个定义语句可以有多个初值表达式，各表达式之间必须用逗号 <strong>‘,’</strong> 分开；如果某个存储单元没有初值表达式，则必须用一个问号 <strong>‘?’</strong> 来表示；
+<ul>
+<li>注：‘?’表示保留存储空间但不存入数据</li>
+</ul>
+</li>
+<li>注释可以不写</li>
+</ul>
+<h2 id="重复说明符dup"><a class="markdownIt-Anchor" href="#重复说明符dup"></a> 重复说明符DUP</h2>
+<ul>
+<li>一般形式：<strong>repeat_conut DUP(表达式，表达式……)</strong>
+<ul>
+<li>repeat_conut是重复次数</li>
+<li>(表达式，表达式……)是被重复的部分</li>
+<li>表达式可以是<strong>存储单元的初值</strong>，也可以是<strong>另一个DUP式子(可以嵌套)</strong></li>
+<li>多个表达式要用逗号 <strong>‘,’</strong> 分开</li>
+</ul>
+</li>
+</ul>
+<h2 id="强制属性操作符ptr"><a class="markdownIt-Anchor" href="#强制属性操作符ptr"></a> 强制属性操作符PTR</h2>
+<ul>
+<li>类似于C语言的强制类型转换，为临时属性</li>
+<li>一般格式：<strong>数据类型　PTR　地址表达式</strong>
+<ul>
+<li>例如：MOV byte ptr[BX]，1H</li>
+</ul>
+</li>
+</ul>
+<h2 id="label伪操作"><a class="markdownIt-Anchor" href="#label伪操作"></a> LABEL伪操作</h2>
+<ul>
+<li>同一个变量可以具有不同的类型属性，除了可以用PTR来定义外，还可以用LABEL伪操作来定义</li>
+<li>一般格式：<strong>符号名  LABEL　变量类型</strong></li>
+<li>LABEL为当前地址的另一别称，不占内存空间</li>
+</ul>
+<h1 id="表达式赋值伪操作"><a class="markdownIt-Anchor" href="#表达式赋值伪操作"></a> 表达式赋值伪操作</h1>
+<h2 id="等价语句"><a class="markdownIt-Anchor" href="#等价语句"></a> 等价语句</h2>
+<p><strong>符号名　EQU　表达式</strong></p>
+<ul>
+<li>作用：左边的符号名代表右边的表达式</li>
+<li>注意：等价语句不会给符号名分配空间，不能重名，也不能被重新定义</li>
+</ul>
+<h2 id="等号"><a class="markdownIt-Anchor" href="#等号"></a> 等号&quot;=&quot;</h2>
+<p><strong>符号名＝数值表达式</strong></p>
+<ul>
+<li>汇编语言提供了 <strong>等号&quot;=&quot;</strong> 来定义符号常数的方法，即可用符号名代表一个常数。</li>
+<li>数值表达式在汇编时<strong>应该可以计算出数值</strong>，它<strong>不能含有向前引用的符号名称</strong>。</li>
+<li>用等号语句定义的符号<strong>可以被重复定义</strong>。</li>
+</ul>
+<h2 id="equ和的区别"><a class="markdownIt-Anchor" href="#equ和的区别"></a> EQU和&quot;=&quot;的区别</h2>
+<ul>
+<li>由EQU伪指令定义后的符号名是<strong>不能重复再定义的</strong></li>
+<li>而“=”伪指令中定义的符号名<strong>可重复定义</strong></li>
+</ul>
+<h1 id="地址计数器与对准伪操作"><a class="markdownIt-Anchor" href="#地址计数器与对准伪操作"></a> 地址计数器与对准伪操作</h1>
+<h2 id="地址计数器"><a class="markdownIt-Anchor" href="#地址计数器"></a> 地址计数器 $</h2>
+<ul>
+<li>作用：保存当前正在汇编的指令的地址</li>
+<li>$ 用在伪操作的参数字段：表示地址计数器的当前值</li>
+</ul>
+<h2 id="org伪操作"><a class="markdownIt-Anchor" href="#org伪操作"></a> ORG伪操作</h2>
+<ul>
+<li>作用：告诉汇编程序，本伪指令下面的内存变量从该“数值表达式”所指定的地址开始分配。</li>
+</ul>
+<h1 id="基数控制伪操作"><a class="markdownIt-Anchor" href="#基数控制伪操作"></a> 基数控制伪操作</h1>
+<p>RADIX  表达式 ; 规定无标记数的基数</p>
+<h1 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h1>
+<h2 id="offset运算符"><a class="markdownIt-Anchor" href="#offset运算符"></a> OFFSET运算符</h2>
+<ul>
+<li>格式：OFFSET  变量或标号</li>
+<li>功能：分离出其后变量或标号的<strong>偏移地址</strong>。</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/12/14/学习/汇编/汇编伪操作/">http://yoursite.com/2019/12/14/学习/汇编/汇编伪操作/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/汇编/">汇编    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/12/16/学习/计组/总线/"><img class="prev_cover lazyload" data-src="https://source.unsplash.com/collection/collectionid/1600x900" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>总线</span></div></a></div><div class="next-post pull_right"><a href="/2019/12/13/学习/C++学习/运算符重载/"><img class="next_cover lazyload" data-src="https://api.dujin.org/bing/1920.php" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>运算符重载</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

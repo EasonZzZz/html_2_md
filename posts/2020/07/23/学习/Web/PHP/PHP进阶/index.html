@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>PHP进阶 | Nice To Meet U</title><meta name="description" content="PHP进阶"><meta name="keywords" content="PHP"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="PHP进阶"><meta name="twitter:description" content="PHP进阶"><meta name="twitter:image" content="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"><meta property="og:type" content="article"><meta property="og:title" content="PHP进阶"><meta property="og:url" content="http://yoursite.com/2020/07/23/学习/Web/PHP/PHP进阶/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="PHP进阶"><meta property="og:image" content="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/07/23/学习/Web/PHP/PHP进阶/"><link rel="prev" title="JavaScript入门" href="http://yoursite.com/2020/07/28/学习/Web/JS/JavaScript入门/"><link rel="next" title="CSS3" href="http://yoursite.com/2020/07/22/学习/Web/前端/CSS/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture)"><div id="post-info"><div id="post-title"><div class="posttitle">PHP进阶</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-07-23<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-08-15</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Web/">Web</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><p><em><strong>date() 函数</strong></em></p>
+<p>PHP date() 函数可把时间戳格式化为可读性更好的日期和时间。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string date ( string $format [, int $timestamp ] )</span><br></pre></td></tr></table></figure>
+<ul>
+<li>format：必需，规定时间戳的格式
+<ul>
+<li>d-天、m-月、Y-年</li>
+<li>c - ISO 8061格式日期、r - RFC 822格式日期</li>
+</ul>
+</li>
+<li>timestamp：可选，规定时间戳。默认当前时间</li>
+</ul>
+<hr>
+<p><em><strong>include 和 require</strong></em></p>
+<p>include 和 require 语句用于在<strong>执行流中插入写在其他文件中的有用的代码</strong>。</p>
+<p>但是两者<strong>处理错误</strong>的方式不同：</p>
+<ul>
+<li>require 生成一个致命错误（E_COMPILE_ERROR），在错误发生后脚本会<strong>停止</strong>执行。</li>
+<li>include 生成一个警告（E_WARNING），在错误发生后脚本会<strong>继续</strong>执行。</li>
+</ul>
+<p>include 一般放在程序的流程控制中，require 一般放在 PHP 文件的开头</p>
+<hr>
+<p><em><strong>文件操作</strong></em></p>
+<p>fopen() 函数用于在 PHP 中打开文件，与 Python 类似。</p>
+<ul>
+<li>有两个必需参数：文件的URL、文件的访问模式</li>
+<li><code>$file=fopen(&quot;welcome.txt&quot;,&quot;r&quot;) or exit(&quot;Unable to open file!&quot;);</code> 使用这个方法打开文件，找不到的话会提示。</li>
+</ul>
+<p>fclose() 函数用于关闭打开的文件。</p>
+<p>feof() 函数检测是否已到达文件末尾（EOF）。</p>
+<p>fgets() 函数用于从文件中逐行读取文件。</p>
+<ul>
+<li>在调用该函数之后，文件指针会移动到下一行。</li>
+</ul>
+<p>fgetc() 函数用于从文件中逐字符地读取文件。</p>
+<ul>
+<li>与fgets 一样，读取后会自动移到下一个字符</li>
+</ul>
+<hr>
+<p><em><strong>文件上传</strong></em></p>
+<p><code>&lt;form&gt;</code> 标签的 <strong>enctype</strong> 属性规定了在提交表单时要使用哪种内容类型。在表单需要二进制数据时，比如文件内容，请使用 “<strong>multipart/form-data</strong>”。</p>
+<p>通过使用 PHP 的全局数组 $_FILES，来获取 HTML 提交的文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ($_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"错误："</span>  . $_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"上传文件名: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"name"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"文件类型: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"文件大小: "</span> . ($_FILES[<span class="string">"file"</span>][<span class="string">"size"</span>] / <span class="number">1024</span>) . <span class="string">" kB&lt;br&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"文件临时存储的位置: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"tmp_name"</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数是表单的 input name，第二个下标可以是 “name”、“type”、“size”、“tmp_name” 或 “error”。
+<ul>
+<li>$_FILES[“file”][“name”] - 上传文件的名称</li>
+<li>$_FILES[“file”][“type”] - 上传文件的类型</li>
+<li>$_FILES[“file”][“size”] - 上传文件的大小，以字节计</li>
+<li>$_FILES[“file”][“tmp_name”] - 存储在服务器的文件的临时副本的名称</li>
+<li>$_FILES[“file”][“error”] - 由文件上传导致的错误代码</li>
+</ul>
+</li>
+</ul>
+<p><strong>上传限制</strong>，举个栗子：用户只能上传 .gif、.jpeg、.jpg、.png 文件，文件大小必须小于 200 kB：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 允许上传的图片后缀</span></span><br><span class="line">$allowedExts = <span class="keyword">array</span>(<span class="string">"gif"</span>, <span class="string">"jpeg"</span>, <span class="string">"jpg"</span>, <span class="string">"png"</span>);</span><br><span class="line">$temp = explode(<span class="string">"."</span>, $_FILES[<span class="string">"file"</span>][<span class="string">"name"</span>]);</span><br><span class="line">$extension = end($temp);        <span class="comment">// 获取文件后缀名</span></span><br><span class="line"><span class="keyword">if</span> ((($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/gif"</span>)</span><br><span class="line">|| ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/jpeg"</span>)</span><br><span class="line">|| ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/jpg"</span>)</span><br><span class="line">|| ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/pjpeg"</span>)</span><br><span class="line">|| ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/x-png"</span>)</span><br><span class="line">|| ($_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] == <span class="string">"image/png"</span>))</span><br><span class="line">&amp;&amp; ($_FILES[<span class="string">"file"</span>][<span class="string">"size"</span>] &lt; <span class="number">204800</span>)    <span class="comment">// 小于 200 kb</span></span><br><span class="line">&amp;&amp; in_array($extension, $allowedExts))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ($_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"错误：: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"error"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"上传文件名: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"name"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件类型: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"type"</span>] . <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件大小: "</span> . ($_FILES[<span class="string">"file"</span>][<span class="string">"size"</span>] / <span class="number">1024</span>) . <span class="string">" kB&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件临时存储的位置: "</span> . $_FILES[<span class="string">"file"</span>][<span class="string">"tmp_name"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"非法的文件格式"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>move_uploaded_file($_FILES[&quot;file&quot;][&quot;tmp_name&quot;], &quot;upload/&quot; . $_FILES[&quot;file&quot;][&quot;name&quot;]);</code> 用来<strong>保存上传的文件</strong>。</p>
+<ul>
+<li>将临时存储的文件移动到指定目录</li>
+</ul>
+<hr>
+<p><em><strong>Cookie</strong></em></p>
+<p>cookie 常用于识别用户。cookie 是一种服务器留在用户计算机上的小文件。每当同一台计算机通过浏览器请求页面时，这台计算机将会发送 cookie。通过 PHP，您能够创建并取回 cookie 的值。</p>
+<p><strong>创建 Cookie</strong></p>
+<p><strong>setcookie() 函数</strong>用于设置 cookie。</p>
+<ul>
+<li>setcookie() 函数<strong>必须位于 <code>&lt;html&gt;</code> 标签之前</strong>。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(name, value, expire, path, domain);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>name：cookie 名</li>
+<li>value：cookie 的值，会自动编码，取回时自动解码
+<ul>
+<li>为防止 URL 编码，请使用 setrawcookie() 取而代之。</li>
+</ul>
+</li>
+<li>expire：cookie 的过期时间，单位为 s
+<ul>
+<li>一般采用 <strong>time()+保存时间</strong> 设置</li>
+</ul>
+</li>
+</ul>
+<p><strong>取回 Cookie</strong></p>
+<p><strong>$_COOKIE 变量</strong>用于取回 cookie 的值。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_COOKIE[<span class="string">"user"</span>]))</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"欢迎 "</span> . $_COOKIE[<span class="string">"user"</span>] . <span class="string">"!&lt;br&gt;"</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"普通访客!&lt;br&gt;"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>删除 Cookie</strong></p>
+<p>当删除 cookie 时，您应当使过期日期变更为过去的时间点。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">"user"</span>, <span class="string">""</span>, time()<span class="number">-3600</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p><em><strong>Session</strong></em></p>
+<p>session 变量用于存储关于用户会话的信息，或者更改用户会话的设置。</p>
+<p>Session 的工作机制是：为每个访客创建一个唯一的 id (UID)，并基于这个 UID 来存储变量。UID 存储在 cookie 中，或者通过 URL 进行传导。</p>
+<p><strong>开始 Session</strong></p>
+<p>使用 session_start() 函数，<strong>必须位于 <code>&lt;html&gt;</code> 标签之前</strong>。</p>
+<p><strong>存取 Session</strong></p>
+<p>通过对 <strong>$_SESSION 变量</strong> 的存取就能实现存取 Session</p>
+<p>可以通过这个来设置一个简单网页浏览计数器：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_SESSION[<span class="string">'views'</span>])) &#123;</span><br><span class="line">    $_SESSION[<span class="string">'views'</span>]=$_SESSION[<span class="string">'views'</span>]+<span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $_SESSION[<span class="string">'views'</span>]=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"浏览量："</span>. $_SESSION[<span class="string">'views'</span>];</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>销毁 Session</strong></p>
+<p>可以使用 <strong>unset()</strong> 或 <strong>session_destroy()</strong> 函数。</p>
+<ul>
+<li>unset() 函数用于<strong>释放</strong>指定的 session 变量</li>
+<li>session_destroy() 函数<strong>彻底销毁</strong> session，将重置 session，失去所有已存储的 session 数据。</li>
+</ul>
+<hr>
+<p><em><strong>E-mail</strong></em></p>
+<p>mail() 函数用于从脚本中发送电子邮件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail(to,subject,message,headers,parameters)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>to：必需，规定 Email 的接收者</li>
+<li>subject：必需，规定 Email 的主题
+<ul>
+<li>不能包含任何新行字符</li>
+</ul>
+</li>
+<li>message：必需，定义要发送的消息
+<ul>
+<li>应使用 LF (\n) 来分隔各行。每行应该限制在 70 个字符内。</li>
+</ul>
+</li>
+<li>headers：可选，规定附加的标题</li>
+<li>parameters：可选，对邮件发送程序规定额外的参数。</li>
+</ul>
+<hr>
+<p><em><strong>错误处理</strong></em></p>
+<p>PHP 默认的错误处理：一条错误消息会被发送到浏览器，这条消息带有文件名、行号以及描述错误的消息。</p>
+<p>以下有三种错误处理方法：die()、自定义错误和错误触发器、错误报告</p>
+<p><strong>die()</strong>：在产生错误时，输入错误消息，然后终止脚本</p>
+<p><strong>自定义错误处理器</strong></p>
+<p>创建一个专用函数，发生错误时调用该函数，该函数必须有能力处理至少两个参数 (error level 和 error message)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error_function</span><span class="params">(error_level,error_message,</span></span></span><br><span class="line"><span class="function"><span class="params">error_file,error_line,error_context)</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>设置错误处理程序</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_error_handler(<span class="string">"error_function"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>触发错误</strong></p>
+<p>由 trigger_error() 函数完成.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$test=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span> ($test&gt;<span class="number">1</span>) &#123;</span><br><span class="line">    trigger_error(<span class="string">"变量值必须小于等于 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>错误记录</strong></p>
+<p>在默认的情况下，根据在 <strong>php.ini</strong> 中的 <strong>error_log</strong> 配置，PHP 向服务器的记录系统或文件发送错误记录。通过使用 <strong>error_log()</strong> 函数，您可以<strong>向指定的文件或远程目的地发送错误记录</strong>。</p>
+<hr>
+<p><em><strong>异常处理</strong></em></p>
+<ul>
+<li><strong>基本使用</strong>：try-catch、throw</li>
+<li><strong>自定义 Exception</strong>：继承 Exception</li>
+<li><strong>设置顶层异常处理器</strong>：set_exception_handler() 函数可设置处理所有未捕获异常的用户定义函数。</li>
+</ul>
+<p>异常的规则：</p>
+<ul>
+<li>需要进行异常处理的代码应该放入 try 代码块内，以便捕获潜在的异常。</li>
+<li>每个 try 或 throw 代码块必须至少拥有一个对应的 catch 代码块。</li>
+<li>使用多个 catch 代码块可以捕获不同种类的异常。</li>
+<li>可以在 try 代码块内的 catch 代码块中抛出（再次抛出）异常。</li>
+</ul>
+<p>如果异常没有进行 try 和 catch，则发生的是语法错误而不是抛出异常</p>
+<hr>
+<p><em><strong>过滤器</strong></em></p>
+<p>PHP 过滤器用于验证和过滤来自非安全来源的数据（外部数据）。</p>
+<p>外部数据：来自表单的输入数据、Cookies、Web services data、服务器变量、数据库查询结果</p>
+<p><strong>函数和过滤器</strong></p>
+<p>过滤变量的过滤器函数：</p>
+<ul>
+<li>filter_var() - 通过一个指定的过滤器来过滤单一的变量</li>
+<li>filter_var_array() - 通过相同的或不同的过滤器来过滤多个变量</li>
+<li>filter_input() - 获取一个输入变量，并对它进行过滤</li>
+<li>filter_input_array() - 获取多个输入变量，并通过相同的或不同的过滤器对它们进行过滤</li>
+</ul>
+<p>完整的函数和过滤器列表：<a href="https://www.runoob.com/php/php-ref-filter.html" target="_blank" rel="noopener">PHP 过滤器</a></p>
+<p><strong>Validating 和 Sanitizing</strong></p>
+<p>有两种过滤器：</p>
+<p>Validating 过滤器：</p>
+<ul>
+<li>用于验证用户输入</li>
+<li>严格的格式规则（比如 URL 或 E-Mail 验证）</li>
+<li>如果成功则返回预期的类型，如果失败则返回 FALSE</li>
+</ul>
+<p>Sanitizing 过滤器：</p>
+<ul>
+<li>用于允许或禁止字符串中指定的字符</li>
+<li>无数据格式规则</li>
+<li>始终返回字符串</li>
+</ul>
+<p><strong>选项和标志</strong>：向指定的过滤器添加额外的过滤选项。不同的过滤器有不同的选项和标志。</p>
+<p><strong>验证输入</strong>：用 filter_input() 函数过滤输入的数据</p>
+<p><strong>净化输入</strong>：用 filter_input() 函数来净化输入数据</p>
+<p><strong>过滤多个输入</strong>：使用 filter_var_array 或 filter_input_array 函数。</p>
+<p><strong>Filter Callback</strong>：使用 FILTER_CALLBACK 过滤器，可以调用自定义的函数，把它作为一个过滤器来使用。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/07/23/学习/Web/PHP/PHP进阶/">http://yoursite.com/2020/07/23/学习/Web/PHP/PHP进阶/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PHP/">PHP    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/07/28/学习/Web/JS/JavaScript入门/"><img class="prev_cover lazyload" data-src="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>JavaScript入门</span></div></a></div><div class="next-post pull_right"><a href="/2020/07/22/学习/Web/前端/CSS/"><img class="next_cover lazyload" data-src="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>CSS3</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Python魔法方法 | Nice To Meet U</title><meta name="description" content="Python魔法方法"><meta name="keywords" content="Python"><meta name="author" content="EasonZzZz"><meta name="copyright" content="EasonZzZz"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Python魔法方法"><meta name="twitter:description" content="Python魔法方法"><meta name="twitter:image" content="https://api.dujin.org/bing/1366.php"><meta property="og:type" content="article"><meta property="og:title" content="Python魔法方法"><meta property="og:url" content="http://yoursite.com/2020/02/12/学习/Python学习/Python魔法方法/"><meta property="og:site_name" content="Nice To Meet U"><meta property="og:description" content="Python魔法方法"><meta property="og:image" content="https://api.dujin.org/bing/1366.php"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/02/12/学习/Python学习/Python魔法方法/"><link rel="prev" title="Python模块" href="http://yoursite.com/2020/02/14/学习/Python学习/Python模块/"><link rel="next" title="Python类和对象" href="http://yoursite.com/2020/02/11/学习/Python学习/Python类和对象/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://easonzzzz.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false,
+  ClickShowText: undefined,
+  medium_zoom: 'false',
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"}
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Nice To Meet U</a></span><i class="fa fa-bars fa-fw toggle-menu pull_right close" aria-hidden="true"></i><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lazyload avatar_img" src="https://raw.githubusercontent.com/EasonZzZz/BlogPic/master/img/20191025120143.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">106</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">41</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">10</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 目录</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#构造和析构"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 构造和析构</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#__init__self"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text"> __init__(self[, …])</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#__new__cls"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text"> __new__(cls[, …])</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#__del__self"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text"> __del__(self)</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#算术运算"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 算术运算</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#常见的算术运算"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text"> 常见的算术运算</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#反运算"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text"> 反运算</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#一元操作符"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text"> 一元操作符</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#字符串"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 字符串</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#属性访问"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> 属性访问</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#描述符property-的原理"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text"> 描述符（property 的原理）</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#定制容器"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text"> 定制容器</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#迭代器"><span class="toc_mobile_items-number">7.</span> <span class="toc_mobile_items-text"> 迭代器</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#生成器"><span class="toc_mobile_items-number">8.</span> <span class="toc_mobile_items-text"> 生成器</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#生成器表达式"><span class="toc_mobile_items-number">9.</span> <span class="toc_mobile_items-text"> 生成器表达式</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#构造和析构"><span class="toc-number">1.</span> <span class="toc-text"> 构造和析构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#__init__self"><span class="toc-number">1.1.</span> <span class="toc-text"> __init__(self[, …])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#__new__cls"><span class="toc-number">1.2.</span> <span class="toc-text"> __new__(cls[, …])</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#__del__self"><span class="toc-number">1.3.</span> <span class="toc-text"> __del__(self)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算术运算"><span class="toc-number">2.</span> <span class="toc-text"> 算术运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的算术运算"><span class="toc-number">2.1.</span> <span class="toc-text"> 常见的算术运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反运算"><span class="toc-number">2.2.</span> <span class="toc-text"> 反运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一元操作符"><span class="toc-number">2.3.</span> <span class="toc-text"> 一元操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串"><span class="toc-number">3.</span> <span class="toc-text"> 字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#属性访问"><span class="toc-number">4.</span> <span class="toc-text"> 属性访问</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#描述符property-的原理"><span class="toc-number">5.</span> <span class="toc-text"> 描述符（property 的原理）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定制容器"><span class="toc-number">6.</span> <span class="toc-text"> 定制容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#迭代器"><span class="toc-number">7.</span> <span class="toc-text"> 迭代器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成器"><span class="toc-number">8.</span> <span class="toc-text"> 生成器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成器表达式"><span class="toc-number">9.</span> <span class="toc-text"> 生成器表达式</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://api.dujin.org/bing/1366.php)"><div id="post-info"><div id="post-title"><div class="posttitle">Python魔法方法</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-02-12<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-02-13</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python学习/">Python学习</a></span><div class="post-meta-wordcount"><i class="fa fa-eye post-meta__icon" aria-hidden="true">       </i><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><p>在此之前，已经接触过了 Python 最常用的魔法方法（__init__()），什么是魔法方法：</p>
+<ul>
+<li>魔法方法总是被左右两个下划线(__)包围</li>
+<li>魔法方法是面向对象的 Python 的一切</li>
+<li>能在适当的时候助你一臂之力</li>
+</ul>
+<h1 id="构造和析构"><a class="markdownIt-Anchor" href="#构造和析构"></a> 构造和析构</h1>
+<h2 id="__init__self"><a class="markdownIt-Anchor" href="#__init__self"></a> __init__(self[, …])</h2>
+<p>__init__() 方法是构造方法，也就是类在实例化成对象时候要调用的初始化方法</p>
+<ul>
+<li><strong>返回值一定是 None</strong></li>
+</ul>
+<h2 id="__new__cls"><a class="markdownIt-Anchor" href="#__new__cls"></a> __new__(cls[, …])</h2>
+<p>事实上，__new__() 才是在一个对象实例化的时候调用的第一个方法。它与其他魔法方法不同，它的 <strong>第一个参数不是 self 而是这个类(cls)，而其他参数会直接传给 __init__() 方法</strong></p>
+<ul>
+<li>
+<p><strong>__new__() 方法需要返回一个实例对象</strong>，通常是 cls 的实例对象，当然也可以返回其他对象</p>
+</li>
+<li>
+<p>__new__() 很少重写，只有一种情况需要重写这个魔法方法，就是当继承一个不可变类型的时候</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CapStr</span><span class="params">(str)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, string)</span>:</span></span><br><span class="line">        string = string.upper()</span><br><span class="line">        <span class="keyword">return</span> str.__new__(cls, string)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = CapStr(<span class="string">'I love you'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">'I LOVE YOU'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里的 <strong>return str.<strong>new</strong>(cls, string)</strong> 值得提倡，建议使用 Python 默认机制，而不是完全重写</li>
+</ul>
+</li>
+</ul>
+<h2 id="__del__self"><a class="markdownIt-Anchor" href="#__del__self"></a> __del__(self)</h2>
+<p>__del__() 是 Python 的析构方法。当一个对象要被销毁时，这个方法就会被调用</p>
+<ul>
+<li>注意：<strong>del x</strong> 并非相当于自动调用 <strong>x.__del__()</strong>，<strong>__del__() 是当垃圾回收机制回收这个对象时候调用的</strong></li>
+</ul>
+<h1 id="算术运算"><a class="markdownIt-Anchor" href="#算术运算"></a> 算术运算</h1>
+<p>工厂函数，其实就是一个类对象，当调用它们时候，事实上就是创建了一个相应的实例对象，就像工厂生产货物一样</p>
+<ul>
+<li>其实 Python 中无处不对象，计算时使用的数字也是对象，因此对象是可以计算的</li>
+<li>Python 的魔法方法还提供了自定义对象的数值处理，通过对下面魔法方法的重写，可以自定义任何对象间的算术运算</li>
+</ul>
+<h2 id="常见的算术运算"><a class="markdownIt-Anchor" href="#常见的算术运算"></a> 常见的算术运算</h2>
+<p>下表列举了算术运算相关的魔法方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔法方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__add__(self, other)</td>
+<td>加法：+</td>
+</tr>
+<tr>
+<td>__sub__(self, other)</td>
+<td>减法：-</td>
+</tr>
+<tr>
+<td>__mul__(self, other)</td>
+<td>乘法：*</td>
+</tr>
+<tr>
+<td>__truediv__(self, other)</td>
+<td>真除法：/</td>
+</tr>
+<tr>
+<td>__floordiv__(self, other)</td>
+<td>整数除法：//</td>
+</tr>
+<tr>
+<td>__mod__(self, other)</td>
+<td>取模算法：%</td>
+</tr>
+<tr>
+<td>__divmod__(self, other)</td>
+<td>当被 divmod() 调用</td>
+</tr>
+<tr>
+<td>__pow__(self, other[, modulo])</td>
+<td>当被 power() 调用或 ** 运算的行为</td>
+</tr>
+<tr>
+<td>__lshift__(self, other)</td>
+<td>按位左移：&lt;&lt;</td>
+</tr>
+<tr>
+<td>__rshift__(self, other)</td>
+<td>按位右移：&gt;&gt;</td>
+</tr>
+<tr>
+<td>__and__(self, other)</td>
+<td>按位与操作：&amp;</td>
+</tr>
+<tr>
+<td>__xor__(self, other)</td>
+<td>按位异或操作：^</td>
+</tr>
+<tr>
+<td>__or__(self, other)</td>
+<td>按位或操作：|</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>重写以上方法时，依然建议采取上面重写 __new__() 的方法，尽量使用 Python 默认机制，而不是自己完全重写</li>
+<li>例如：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self + other</span><br><span class="line"><span class="comment"># 这里就触发无限递归了</span></span><br><span class="line"><span class="comment"># 因为 self + other 依然调用 __add__ 魔法方法</span></span><br><span class="line"><span class="comment"># 这不就是递归了？</span></span><br><span class="line"><span class="comment"># 建议使用 int.__add__(self, other)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="反运算"><a class="markdownIt-Anchor" href="#反运算"></a> 反运算</h2>
+<p>下表列举了反运算相关的魔法方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔法方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__radd__(self, other)</td>
+<td>加法：+</td>
+</tr>
+<tr>
+<td>__rsub__(self, other)</td>
+<td>减法：-</td>
+</tr>
+<tr>
+<td>__rmul__(self, other)</td>
+<td>乘法：*</td>
+</tr>
+<tr>
+<td>__rtruediv__(self, other)</td>
+<td>真除法：/</td>
+</tr>
+<tr>
+<td>__rfloordiv__(self, other)</td>
+<td>整数除法：//</td>
+</tr>
+<tr>
+<td>__rmod__(self, other)</td>
+<td>取模算法：%</td>
+</tr>
+<tr>
+<td>__rdivmod__(self, other)</td>
+<td>当被 divmod() 调用</td>
+</tr>
+<tr>
+<td>__rpow__(self, other[, modulo])</td>
+<td>当被 power() 调用或 ** 运算的行为</td>
+</tr>
+<tr>
+<td>__rlshift__(self, other)</td>
+<td>按位左移：&lt;&lt;</td>
+</tr>
+<tr>
+<td>__rrshift__(self, other)</td>
+<td>按位右移：&gt;&gt;</td>
+</tr>
+<tr>
+<td>__rand__(self, other)</td>
+<td>按位与操作：&amp;</td>
+</tr>
+<tr>
+<td>__rxor__(self, other)</td>
+<td>按位异或操作：^</td>
+</tr>
+<tr>
+<td>__ror__(self, other)</td>
+<td>按位或操作：|</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>以上反运算与上一节的算术运算只多了一个 <strong>‘r’</strong>，这些函数是在左操作数不支持相应的操作时被调用的</li>
+<li>例如：a + b，a 没有定义 __add__() 或者不支持相应操作，此时  Python 就会自动调用 b 的 __radd__() 方法</li>
+</ul>
+<h2 id="一元操作符"><a class="markdownIt-Anchor" href="#一元操作符"></a> 一元操作符</h2>
+<p>Python 支持的一元操作符：</p>
+<ul>
+<li>__neg__() 表示正号行为；</li>
+<li>__pos__() 表示负号行为；</li>
+<li>__abs__() 表示定义 abs() 函数被调用时的行为；</li>
+<li>__invert__() 表示定义按位取反的行为</li>
+</ul>
+<h1 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h1>
+<p><strong><em>__str__()</em> 和 <em>__repr___()</em> 是两个 <em>返回字符串</em> 的魔法方法。</strong></p>
+<ul>
+<li>__str__() 是定义对实例对象调用 str() 时的行为，面向人，转化为适于人阅读的形式</li>
+<li>__repr___() 是定义对实例对象调用 repr() 时的行为，面向机器，转化为供解释器读取的形式</li>
+<li>定义类的输出的时候经常会使用这两个其中的魔法</li>
+</ul>
+<h1 id="属性访问"><a class="markdownIt-Anchor" href="#属性访问"></a> 属性访问</h1>
+<p>通常使用 <strong>点(.)</strong> 操作符的形式访问对象的属性，在 <strong>类与对象</strong> 中也提到几个访问属性的 BIF，还提到了 property() 来更好的管理属性。<br>
+下表列举了与属性相关的魔法方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔法方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__getattr__(self, name)</td>
+<td>当用户试图获取一个不存在的属性时的行为</td>
+</tr>
+<tr>
+<td>__getattribute__(self, name)</td>
+<td>当该类的属性被访问时的行为</td>
+</tr>
+<tr>
+<td>__setattr__(self, name, value)</td>
+<td>当一个属性被设置时的行为</td>
+</tr>
+<tr>
+<td>__delattr__(self, name)</td>
+<td>当一个属性被删除时的行为</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>注意：重写这些方法时，容易陷入无限递归，建议在自定义后，建议使用 super() 来调用基类相应的魔法方法</p>
+</li>
+<li>
+<p>例如：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name, value)</span>:</span></span><br><span class="line">    self.name = value</span><br><span class="line">    <span class="comment"># 此时陷入无限递归</span></span><br><span class="line">    <span class="comment"># 因为这里发生对属性的赋值操作</span></span><br><span class="line">    <span class="comment"># 会再自动调用 __setattr__ ()</span></span><br><span class="line">    <span class="comment"># 因而陷入无限递归</span></span><br><span class="line">    <span class="comment"># 在__setattr__() 中赋值，建议使用</span></span><br><span class="line">    <span class="comment"># super().__setattr__(name, value)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>还有一种给特殊属性 __dict__ 赋值的方法。<strong>对象有一个特殊的属性：__dict__，它的作用是 <em>以字典的形式显示出当前所有属性名以及相应的值</em></strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="描述符property-的原理"><a class="markdownIt-Anchor" href="#描述符property-的原理"></a> 描述符（property 的原理）</h1>
+<p><strong>描述符(descriptor)</strong> 是什么：描述符 <strong>本质就是一个新式类</strong>,在这个新式类中,至少定义了 __get__()，__set__()，__delete__() 三个特殊魔法方法中的任意一个。它的作用是 <strong>用来代理另一个类的属性</strong>，</p>
+<p>下表是与描述符相关的魔法方法</p>
+<table>
+<thead>
+<tr>
+<th>魔法方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__get__(self, instance, owner)</td>
+<td>用于属性访问，它返回属性的值</td>
+</tr>
+<tr>
+<td>__set__(self, instance, value)</td>
+<td>将在属性分配操作中调用，不返回任何内容</td>
+</tr>
+<tr>
+<td>__delete__(self, instance)</td>
+<td>控制删除操作，不返回任何内容</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>property 事实上就是一个描述符类</li>
+</ul>
+<h1 id="定制容器"><a class="markdownIt-Anchor" href="#定制容器"></a> 定制容器</h1>
+<p>要想实现容器的定制，首先要谈一谈协议。</p>
+<ul>
+<li>协议(protocol) 与其他编程语言中的接口相似，它规定哪些方法必须定义。然而，Python 中的协议没那么正式，更像是一种指南，不会严格的要求定义</li>
+</ul>
+<p>在 Python 中，像序列类型，映射类型都属于容器类型。与定制容器有关的一些协议：</p>
+<ul>
+<li>容器不可变，只需要定义 __len__() 和 __getitem__() 方法</li>
+<li>容器可变得话，除了定义 __len__() 和 __getitem__() 方法，还要定义 __setitem__() 和 __delitem__() 两个方法</li>
+</ul>
+<p>下表列举了与容器类型相关的魔法方法。</p>
+<table>
+<thead>
+<tr>
+<th>魔法方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__len__(self)</td>
+<td>当被 len() 函数调用时（返回元素个数）</td>
+</tr>
+<tr>
+<td>__getitem__(self, key)</td>
+<td>获取容器中指定元素，相当于 self[key]</td>
+</tr>
+<tr>
+<td>__setitem__(self, key, value)</td>
+<td>设置容器中指定元素，相当于 self[key]=value</td>
+</tr>
+<tr>
+<td>__delitem__(self, key)</td>
+<td>删除容器中指定元素，相当于 del self[key]</td>
+</tr>
+<tr>
+<td>__iter__(self)</td>
+<td>当迭代容器中的元素</td>
+</tr>
+<tr>
+<td>__reversed__(self)</td>
+<td>当被 reversed() 函数调用时</td>
+</tr>
+<tr>
+<td>__contains__(self, item)</td>
+<td>当使用成员测试操作符（in 或 not in）时</td>
+</tr>
+</tbody>
+</table>
+<h1 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h1>
+<p>迭代是 Python 最强大的功能之一，是<strong>访问集合元素的一种方式</strong>。<br>
+迭代的意思类似于循环，每一次重复的过程称为一次迭代的过程，而每一次迭代得到的结果会被用来作为下一次迭代的初始值。<br>
+<strong>迭代器是提供迭代方法的容器</strong>，通常接触的迭代器有序列、字典等，它们都支持迭代的操作</p>
+<ul>
+<li><strong>迭代器是一个可以记住遍历的位置的对象</strong>，从集合的第一个元素开始访问，直到所有的元素被访问完结束。<strong>迭代器只能往前不会后退。</strong></li>
+</ul>
+<p>关于迭代，Python 提供了两个 BIF：<strong>iter()</strong> 和 <strong>next()</strong></p>
+<ul>
+<li>对一个容器对象调用 iter() 就得到它的迭代器</li>
+<li>调用 next() 迭代器就会返回下一个值
+<ul>
+<li>如果迭代器没有值可以返回了，Python 会抛出一个名为 StopIteration 的异常</li>
+</ul>
+</li>
+<li>利用这两个 BIF 就可以分析出 for 语句其实是这样工作的  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">it = iter(container)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        each = next(it)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>关于实现迭代器的魔法方法有：__iter__() 和 __next__()</p>
+<ul>
+<li>如果一个容器是迭代器，就必须实现 __iter__()，这个方法实际上就是返回迭代器本身(self)</li>
+<li>重点是 __next__()，它决定了迭代的规则</li>
+<li>以下举例个斐波那契数列的迭代器  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fibs</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n=<span class="number">20</span>)</span>:</span></span><br><span class="line">        self.pre = <span class="number">0</span></span><br><span class="line">        self.cur = <span class="number">1</span></span><br><span class="line">        self.n = n</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.pre, self.cur = self.cur, self.pre+self.cur</span><br><span class="line">        <span class="keyword">if</span> self.pre &gt; self.n:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        <span class="keyword">return</span> self.pre</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fibs = Fibs(<span class="number">100</span>)</span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> fibs:</span><br><span class="line">    print(each)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="生成器"><a class="markdownIt-Anchor" href="#生成器"></a> 生成器</h1>
+<p>与迭代器一样，生成器也是 Python 最强大的功能之一。<br>
+生成器的学习并不涉及魔法方法，也没有类和对象，它仅用普通的函数就能实现了。</p>
+<p><strong>生成器其实是一种迭代器的实现</strong>，但是更为简单。迭代器需要定义一个类和实现相关方法，而<strong>生成器只需要在普通函数中加上 <em>yield</em> 语句即可</strong></p>
+<p>生成器的发明使得 Python 模仿协同程序的概念得以实现</p>
+<ul>
+<li>协同程序：可以运行的独立函数调用，函数可以暂停或挂起，并在需要的时候从程序离开的地方继续或重新开始</li>
+<li>对于调用一个普通的 Python 函数，一般是从函数的第一行代码执行开始，结束于 return、异常或者函数所有语句执行完。<strong>一旦函数将控制权交还给调用者，函数所有工作以及局部变量中的数据全部丢失。</strong></li>
+<li><strong>Python 的生成器可以暂时挂起函数，并保留函数的局部变量等数据，然后再次调用它时，从上次暂停的位置继续执行下去</strong></li>
+<li>在调用生成器运行的过程中，每次 <strong>遇到 yield 时函数会暂停</strong> 并保存当前所有的运行信息，<strong>返回 yield 的值</strong>, 并 <strong>在下一次执行 next() 方法时从当前位置继续运行</strong></li>
+<li><strong>调用一个生成器函数，返回的是一个迭代器对象</strong></li>
+</ul>
+<p>下面我们再次使用斐波那契数列举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibsGen</span><span class="params">()</span>:</span></span><br><span class="line">    pre = <span class="number">0</span></span><br><span class="line">    cur = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        pre, cur = cur, pre+cur</span><br><span class="line">        <span class="keyword">yield</span> pre</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> fibsGen():</span><br><span class="line">    <span class="keyword">if</span> each &gt; <span class="number">100</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(each)</span><br></pre></td></tr></table></figure>
+<h1 id="生成器表达式"><a class="markdownIt-Anchor" href="#生成器表达式"></a> 生成器表达式</h1>
+<p><strong>列表推导式(list comprehensions)</strong> 也叫做列表解析，灵感取自函数式编程 Hashell，它是一个非常有用和灵活的工具，可以动态地创建列表。</p>
+<ul>
+<li>下面举个栗子吧：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列表推导式</span></span><br><span class="line">list1 = [i*i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上式相当于</span></span><br><span class="line">list2 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    list2.append(i*i)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>除了列表推导式，还有<strong>字典推导式（dictionary comprehension）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;i : i%<span class="number">2</span> == <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)&#125;</span><br><span class="line">&#123;<span class="number">0</span>: <span class="literal">True</span>, <span class="number">1</span>: <span class="literal">False</span>, <span class="number">2</span>: <span class="literal">True</span>, <span class="number">3</span>: <span class="literal">False</span>, <span class="number">4</span>: <span class="literal">True</span>, <span class="number">5</span>: <span class="literal">False</span>, <span class="number">6</span>: <span class="literal">True</span>, <span class="number">7</span>: <span class="literal">False</span>, <span class="number">8</span>: <span class="literal">True</span>, <span class="number">9</span>: <span class="literal">False</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>除了上面两个，还有元组推导式吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>(i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x000001E43227B348</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>似乎没有元组推导式哦？其实它就是个 generator ，小括号的内容就是 <strong>生成器表达式（generator expressions）</strong>，可以利用 next() 生成 0-9 的序列  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(e)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(e)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>还有一个特性更“牛”，<strong>生成器表达式也能作为函数的参数使用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sum(i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>) <span class="keyword">if</span> i % <span class="number">2</span>)</span><br><span class="line"><span class="number">2500</span></span><br></pre></td></tr></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EasonZzZz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/12/学习/Python学习/Python魔法方法/">http://yoursite.com/2020/02/12/学习/Python学习/Python魔法方法/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">Nice To Meet U</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python    </a></div><div class="post_share"></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/02/14/学习/Python学习/Python模块/"><img class="prev_cover lazyload" data-src="https://source.unsplash.com/collection/collectionid/1600x900" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>Python模块</span></div></a></div><div class="next-post pull_right"><a href="/2020/02/11/学习/Python学习/Python类和对象/"><img class="next_cover lazyload" data-src="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Python类和对象</span></div></a></div></nav></div></div><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By EasonZzZz</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.15/dist/snackbar.min.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="/js/third-party/click_heart.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
